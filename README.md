@@ -1,4 +1,5 @@
-shop
+<<<<<<< HEAD
+﻿shop-ccccccccc
 ====
 【本地】
 数据库：
@@ -8,8 +9,11 @@ http://192.168.40.190/phpMyAdmin
     'DB_USER'=>'root',
     'DB_PWD'=>'123456'
 
+=======
+rangjiajie.com
+=====================================================================================================
+>>>>>>> origin/master
 
-http://192.168.40.190 root 123456
 ##目录结构 /var/www/html
 deploy root
                 |shop   |Common
@@ -34,7 +38,7 @@ deploy root
                 |ThinkPHP 
 
 =====================================================================================================
-【外网】
+
 数据库：
 https://198.46.145.47:7777/thirdparty/phpMyAdmin/ 
     'DB_HOST'=>'localhost',
@@ -45,4 +49,3 @@ https://198.46.145.47:7777/thirdparty/phpMyAdmin/
 FTP:
 198.46.145.47  rangjiajie.com   comrangjiajie
 
-访问地址 rangjiajie.com
