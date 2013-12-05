@@ -52,7 +52,7 @@
     </thead>
    <volist name="list"  id="goods">
 	     <tr>
-            <td>{$goods.id}</td>
+            <td>{$i}</td>
             <td>{$goods.cat_id}</td>
             <td>{$goods.goods_name}</td>
             <td>{$goods.market_price}</td>
@@ -78,7 +78,7 @@
         
 		$('#addnew').click(function(){
 
-				window.location.href="add.html";
+				window.location.href="__URL__/detail";
 		 });
 
 
