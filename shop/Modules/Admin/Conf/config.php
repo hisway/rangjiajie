@@ -15,8 +15,8 @@ return array(
         'AUTH_USER' => 'ws_user'//用户信息表
     ),
 
-    
-	
+
+
 
 
 
@@ -28,4 +28,4 @@ return array(
 
 
 ) ;
- ?>
+?>
