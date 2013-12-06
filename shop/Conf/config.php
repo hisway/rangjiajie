@@ -7,6 +7,10 @@ return array(
 
 
     'DB_HOST'=>'localhost',
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     'DB_NAME'=>'rangjiajie',
     'DB_USER'=>'rangjiajie',
     'DB_PWD'=>'comrangjiajie',

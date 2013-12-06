@@ -14,9 +14,12 @@ return array(
 
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> origin/master
 );
 ?>

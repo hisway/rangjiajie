@@ -15,8 +15,11 @@ return array(
         'AUTH_USER' => 'ws_user'//用户信息表
     ),
 
+<<<<<<< HEAD
     
 	
+=======
+>>>>>>> origin/master
 
 
 
@@ -25,7 +28,14 @@ return array(
 
 
 
+
+
+<<<<<<< HEAD
+) ;
+ ?>
+=======
 
 
 ) ;
- ?>
+?>
+>>>>>>> origin/master
