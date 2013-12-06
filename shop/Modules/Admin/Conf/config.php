@@ -12,7 +12,7 @@ return array(
         'AUTH_GROUP' => 'ws_auth_group', //用户组数据表名
         'AUTH_GROUP_ACCESS' => 'ws_auth_group_access', //用户组明细表
         'AUTH_RULE' => 'ws_auth_rule', //权限规则表
-        'AUTH_USER' => 'ws_user'//用户信息表
+        'AUTH_USER' => 'ws_admin'//用户信息表
     ),
 
 
