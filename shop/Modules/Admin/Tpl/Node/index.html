@@ -13,7 +13,7 @@
                             <th>规则标识</th>
                             <th>中文名称</th>
                             <th>规则表达式</th>
-                            <th>排序</th>
+                            <!-- <th>排序</th> -->
                             <th>状态</th>
                             <th>操作</th>
                         </tr>
@@ -25,22 +25,22 @@
                             <td>{$v.name}</td>
                             <td>{$v.title}</td>
                             <td>{$v.condition}</td>
-                            <td>
+                            <!-- <td>
                                 <input  type="text"  class='input-mini' name='{$v.id}' value='{$v.sort}'/>
-                            </td>
+                            </td> -->
                             <td><if condition='$v.status eq 1'>启用<else />禁用</if></td>
                             <td>
-                                <a href="{:U(GROUP_NAME.'/Node/addAuth',array('id'=>$v['id']))}"><i class="icon-plus"></i></a>
+                                <!-- <a href="{:U(GROUP_NAME.'/Node/add',array('id'=>$v['id']))}"><i class="icon-plus"></i></a> -->
                                 <a href="{:U(GROUP_NAME.'/Node/edit',array('id'=>$v['id']))}"><i class="icon-pencil"></i></a>
                                 <a href="{:U(GROUP_NAME.'/Node/del',array('id'=>$v['id']))}"><i class="icon-remove"></i></a>
                             </td>
                         </tr>
                     </foreach>
-                    <tr>
+                    <!-- <tr>
                         <td colspan='5'>
                             <input type="submit" class="btn btn-primary" value='排序'/>
                         </td>
-                    </tr>
+                    </tr> -->
                     <tbody>
                 </table>
             </form>

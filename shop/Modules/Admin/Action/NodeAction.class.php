@@ -10,7 +10,7 @@ Class NodeAction extends Action{
 	    $this->display();
 	}
 
-	public function addAuth(){
+	public function addNode(){
 		$data = $_POST;
 		$data['name'] = $data['model'].'-'.$data['action'];
 		if (M('auth_rule')->add($data)) {
@@ -27,7 +27,7 @@ Class NodeAction extends Action{
 	    $this->display();
 	}
 
-	public function editAuth(){
+	public function editNode(){
 		$data = $_POST;
 		$data['name'] = $data['model'].'-'.$data['action'];
 		if (M('auth_rule')->save($data)) {
@@ -45,14 +45,7 @@ Class NodeAction extends Action{
 		}	    
 	}
 
-	//排序
-    public function sortAuth(){
-        $db = M('auth_rule');
-        foreach ($_POST as $id => $sort) {
-            $db->where(array('id'=>$id))->setField('sort',$sort);
-        }   
-        $this->redirect(GROUP_NAME.'/Node/index');
-    }
+	
 
 	
 }
