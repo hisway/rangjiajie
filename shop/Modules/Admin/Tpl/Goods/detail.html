@@ -11,6 +11,10 @@
     <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+    
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+    
     <style type="text/css">
         body {
             padding-bottom: 40px;
@@ -48,7 +52,7 @@
 		</tr>
 		
     <tr>
-        <td class="tableleft">商品品牌</td>
+        <td class="tableleft">产品品牌</td>
         <td>
         	<select name="brand_id" size="1">
 		          <option value="0">根栏目</option>          
@@ -60,15 +64,6 @@
         <td><input type="text" name="keywords"/></td>
     </tr>
     
-     <tr>
-        <td width="10%" class="tableleft">商品描述</td>
-        <td><textarea name="good_desc"/></textarea></td>
-    </tr>
-    
-    <tr>
-        <td width="10%" class="tableleft">商品图片</td>
-        <td><input type="file" name="name"></td>
-    </tr>
     
     
      <tr>
@@ -90,6 +85,7 @@
         <td width="10%" class="tableleft">市场价</td>
         <td><input type="text" name="market_price"/></td>
     </tr>
+     
     <tr>
         <td width="10%" class="tableleft">促销价</td>
         <td><input type="text" name="promote_price"/></td>
@@ -100,7 +96,16 @@
         <td><input type="text" name="promote_start_date"/> - <input type="text" name="promote_end_date"/></td>
     </tr>
     
+    <tr>
+        <td width="10%" class="tableleft">产品图片</td>
+        <td><input type="file" name="goods_img"></td>
+    </tr>
     
+    
+     <tr>
+        <td width="10%" class="tableleft">产品描述</td>
+        <td><textarea name="good_desc" id="myEditor" ></textarea></td>
+    </tr>
     
     
    
@@ -120,5 +125,16 @@
 				window.location.href="index.html";
 		 });
 
+    });
+</script>
+
+<script type="text/javascript">
+    //var editor = new UE.ui.Editor();
+  //  editor.render("myEditor");
+    //1.2.4以后可以使用一下代码实例化编辑器
+   
+    UE.getEditor('myEditor',{
+        initialFrameWidth : 680,
+        initialFrameHeight: 200
     });
 </script>

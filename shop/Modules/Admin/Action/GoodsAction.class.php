@@ -3,7 +3,7 @@
 Class GoodsAction extends Action{
 	public function index(){
 		
-		$goods=M('goods');
+		$goods=M('Goods');
 		$result=$goods->select();
       $this->assign('list',$result);
 	    $this->display();
@@ -16,6 +16,19 @@ Class GoodsAction extends Action{
 		$this->display();
 		
 	}
+	
+	
+	public function add(){
+		
+
+		
+		
+	}
+	
+
+	
+	
+	
 
 	
 }
