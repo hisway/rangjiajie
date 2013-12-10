@@ -10,8 +10,9 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>规则标识</th>
-                            <th>中文名称</th>
+                            <th>节点名称</th>
+                            <th>MODEL</th>
+                            <th>ACTION</th>
                             <th>规则表达式</th>
                             <!-- <th>排序</th> -->
                             <th>状态</th>
@@ -22,12 +23,10 @@
                     <foreach name='rule' item='v'>
                         <tr>
                             <td>{$v.id}</td>
-                            <td>{$v.name}</td>
                             <td>{$v.title}</td>
+                            <td>{$v.model}</td>
+                            <td>{$v.action}</td>
                             <td>{$v.condition}</td>
-                            <!-- <td>
-                                <input  type="text"  class='input-mini' name='{$v.id}' value='{$v.sort}'/>
-                            </td> -->
                             <td><if condition='$v.status eq 1'>启用<else />禁用</if></td>
                             <td>
                                 <!-- <a href="{:U(GROUP_NAME.'/Node/add',array('id'=>$v['id']))}"><i class="icon-plus"></i></a> -->

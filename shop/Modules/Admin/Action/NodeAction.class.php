@@ -2,7 +2,13 @@
 
 Class NodeAction extends Action{
 	public function index(){
-		$this->rule = M('auth_rule')->select();
+		$rule = M('auth_rule')->select();
+		foreach ($rule as $key => $v) {
+			$arr = explode('-', $v['name']) ;
+			$rule[$key]['model'] = $arr[0];
+			$rule[$key]['action'] = $arr[1];
+		}
+		$this->rule = $rule;
 	    $this->display();
 	}
 
