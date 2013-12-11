@@ -11,7 +11,7 @@ Class LoginAction extends Action{
  		$pwd = I('password');
  		$user = M('admin')->where(array('username'=>$username))->find();
  		if (!$user||$user['password']!=$pwd) {//md5($pwd)
- 		$this->error('账户或密码错误');
+ 		$this->error('密码与账户不匹配');
  		}
 
  		$data = array(
@@ -35,9 +35,17 @@ Class LoginAction extends Action{
  	}
 
  	public function checkusername(){
- 		$username = I('usernamr');
- 		echo 3;
+ 		$username = I('username');
+ 		if (M('admin')->where(array('username'=>$username))->find()) {
+ 			echo 1;//正常
+ 		}
+ 	}
 
+ 	public function checkcode(){
+ 		$code = I('code','','md5');
+ 		if ($code==session('verify')) {
+ 			echo 1;//正常
+ 		}
  	}
 	
 

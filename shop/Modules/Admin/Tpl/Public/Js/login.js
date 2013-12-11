@@ -26,7 +26,7 @@ $(function(){
 			username.parent().find("span").remove().end().append("<span class='error'>用户名不能为空</span>");
 			return ;
 		}
-		$.post("localhost/rangjiajie/index.php/Admin/Login/checkusername",{username:username.val().trim()},function(stat){
+		$.post("checkusername",{username:username.val().trim()},function(stat){
 			if(stat==1){
 				validate.username=0;
 				username.parent().find("span").remove();
@@ -47,7 +47,7 @@ $(function(){
 			password.parent().find("span").remove().end().append("<span class='error'>密码不能为空</span>");
 			return ;
 		}
-		$.post(CONTROL+"/checkpassword",{password:password.val().trim(),username:username.val().trim()},function(stat){
+		$.post("checkpassword",{password:password.val().trim(),username:username.val().trim()},function(stat){
 			if(stat==1){
 				validate.password=0;
 				password.parent().find("span").remove();
@@ -64,7 +64,7 @@ $(function(){
 			code.parent().find("span").remove().end().append("<span class='error'>验证码不能为空</span>");
 			return ;
 		}
-		$.post(CONTROL+"/checkcode",{code:code.val().trim()},function(stat){
+		$.post("checkcode",{code:code.val().trim()},function(stat){
 			if(stat==1){
 				validate.code=0;
 				code.parent().find("span").remove();

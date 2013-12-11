@@ -54,8 +54,8 @@
 
     <form class="form-signin" method="post" action="{:U(GROUP_NAME.'/Login/login')}">
         <h2 class="form-signin-heading">管理后台登录</h2>
-        <input type="text" name="username" class="input-block-level" placeholder="账号">
-        <input type="password" name="password" class="input-block-level" placeholder="密码">
+        <input type="text" name="username" class="input-large" placeholder="账号">
+        <input type="password" name="password" class="input-large" placeholder="密码">
         <input type="text" name="code" class="input-medium" placeholder="验证码">
         <img src="{:U(GROUP_NAME.'/Login/verify')}" id="code"/> 
         <a href="javascript:void(change_code(this));">换一个</a>
