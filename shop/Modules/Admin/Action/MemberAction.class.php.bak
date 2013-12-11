@@ -37,9 +37,9 @@ Class MemberAction extends Action{
 	    	
 	    if(M('user')->add($data)){
 	    	
-	    	$this->success('æ·»åŠ æˆåŠŸ',U(GROUP_NAME.'/Member/index'));
+	    	$this->success('Ìí¼Ó³É¹¦',U(GROUP_NAME.'/Member/index'));
 	    }else{
-	    	$this->error('æ·»åŠ å¤±è´¥');
+	    	$this->error('Ìí¼ÓÊ§°Ü');
 	    	}
 //$this->display('add');
 	

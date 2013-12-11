@@ -83,7 +83,7 @@
             {text:'会员管理',items:
               [
                 {id:'1',text:'会员列表',href:'Admin/Member/index.html'},
-                {id:'2',text:'添加会员',href:'Admin/Member/add.html'}
+                {id:'2',text:'添加会员',href:'Admin/Member/index.html'}
               ]
             },
             {text:'会员等级管理',items:
