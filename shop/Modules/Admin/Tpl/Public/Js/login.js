@@ -26,7 +26,7 @@ $(function(){
 			username.parent().find("span").remove().end().append("<span class='error'>用户名不能为空</span>");
 			return ;
 		}
-		$.post(CONTROL+"/checkusername",{username:username.val().trim()},function(stat){
+		$.post("localhost/rangjiajie/index.php/Admin/Login/checkusername",{username:username.val().trim()},function(stat){
 			if(stat==1){
 				validate.username=0;
 				username.parent().find("span").remove();

@@ -24,14 +24,20 @@ Class LoginAction extends Action{
 		//$_SESSION['uid']=$user['id']
 	 	session('uid',$user['id']);
 	 	session('username',$user['username']);
-	 	session('time',date('y-m-d H:i',$user['logintime']));
-	 	session('loginip',$user['loginip']);
+	 	session('time',date('y-m-d H:i',$user['last_login']));
+	 	session('loginip',$user['last_ip']);
 	 	redirect(__GROUP__);
 	}
 
 	public function verify(){
  	    import('ORG.Util.Image');
  	    Image::buildImageVerify(4,1,'png');
+ 	}
+
+ 	public function checkusername(){
+ 		$username = I('usernamr');
+ 		echo 3;
+
  	}
 	
 

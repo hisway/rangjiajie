@@ -8,7 +8,7 @@ Class IndexAction extends CommonAction{
 	public function loginout(){
 		session_unset();
 		session_destroy();
-		$this->redirect('Admin/Login/index');
+		$this->redirect('Login/index');
 	}
 
 	
