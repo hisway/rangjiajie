@@ -17,21 +17,24 @@
         <tr>
             <td class="tableleft">状态</td>
             <td>
+                <input type="radio" name="status" value="1"
+                    <eq name="user.status" value='1'>checked</eq> /> 启用
                 <input type="radio" name="status" value="0"
-                    <eq name="user.status" value='0'>checked</eq> /> 启用
-              <input type="radio" name="status" value="1"
-                    <eq name="user.status" value='1'>checked</eq> /> 禁用
+                    <eq name="user.status" value='0'>checked</eq> /> 禁用
             </td>
         </tr>
         <tr>
             <td class="tableleft">角色</td>
             <td>
-                <select name="role_id">
+                <!-- <select name="role_id">
                     <option  value="{$role.id}">{$role.title}</option>
                     <foreach name='roles' item='v'>
                         <option  value="{$v.id}">{$v.title}</option>
                     </foreach>     
-                </select>
+                </select> -->
+                <foreach name='role_all' item='v'> 
+                    <label class='checkbox inline'><input type='checkbox' name='role[]' value='{$v.id}' />{$v.title}</label>
+                </foreach>
             </td>
         </tr>
         <tr>

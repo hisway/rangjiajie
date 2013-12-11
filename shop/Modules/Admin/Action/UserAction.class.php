@@ -1,13 +1,14 @@
 <?php 
 
-Class UserAction extends Action{
+Class UserAction extends CommonAction{
 	public function index(){
 		$user = M('admin')->select();
 		$db = M('auth_group_access');
-		foreach ($user  as $key => $v) {//需修改
-			$role = $db->find($v['role_id']);
-			$user[$key]['role'] = $role['title'];
-		}
+		/*$auth = new Auth();
+		foreach ($user  as $key => $v) {
+			$group = $auth->getGroups($v['id']);
+			$user[$key]['role'] = $group[0]['title'];
+		}*/
 		$this->user = $user;
 	    $this->display();
 	}
@@ -19,8 +20,11 @@ Class UserAction extends Action{
 
 	public function addUser(){
 		$data = $_POST;
+		$db = M('auth_group_access');
 		if ($id=M('admin')->add($data)) {
-			M('auth_group_access')->add(array('uid'=>$id,'group_id'=>$data['role_id']));
+			foreach ($data['role'] as $key => $v) {
+				$db->add(array('uid'=>$id,'group_id'=>$v));
+			}			
 			$this->success('添加成功',U(GROUP_NAME.'/User/index'));
 		}else{
 			$this->error('添加失败');
@@ -30,23 +34,29 @@ Class UserAction extends Action{
 	public function edit(){
 		$id = I('id');
 		$user = M('admin')->find($id);
-		$db = M('auth_group');
-		$role = $db->find($user['role_id']);
-
+		$auth = new Auth();
+		$role = $auth->getGroups($id); //前台需更改
 		$this->user = $user;
-		$this->role =$role;
-		$this->roles = $db->select();
+		$this->role = $role;
+		$this->role_all = M('auth_group')->select();
 	    $this->display();
 	}
 
 	public function editUser(){
 		$id = I('id');
 		$data = $_POST;
-		if (M('admin')->save($data)) {
-			M('auth_group_access')->where(array('uid'=>$id))->save(array('group_id'=>$data['role_id']));
-			$this->success('修改成功',U(GROUP_NAME.'/User/index'));
+		$a = M('admin')->save($data);
+		$db = M('auth_group_access');
+		$b = $db->where(array('uid'=>$id))->delete();
+		if ($data['role']) {
+			foreach ($data['role'] as $key => $v) {
+				$c = $db->add(array('uid'=>$id,'group_id'=>$v));
+			}
+		}
+		if ($a||$b||$c) { //原来有权限未做更改，也提示已更新
+			$this->success('信息已更新',U(GROUP_NAME.'/User/index'));
 		}else{
-			$this->error('内容无修改');
+			$this->error('信息无修改');
 		}	    
 	}
 

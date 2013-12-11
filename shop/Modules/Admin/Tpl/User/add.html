@@ -22,13 +22,10 @@
     </tr>
     <tr>
         <td class="tableleft">角色</td>
-
         <td>
-            <select name="role_id">
-                <foreach name='role' item='v'>
-                    <option  value="{$v.id}">{$v.title}</option>
-                </foreach>     
-            </select>
+            <foreach name='role' item='v'> 
+                <label class='checkbox inline'><input type='checkbox' name='role[]' value='{$v.id}' />{$v.title}</label>
+            </foreach>
         </td>
     </tr>
     <tr>
