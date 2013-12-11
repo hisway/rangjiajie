@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
     <title></title>
@@ -34,46 +34,31 @@
 </head>
 <body>
 <form class="form-inline definewidth m20" action="index.html" method="get">  
-    会员列表：
+    角色名称：
     <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
-    <button type="submit" class="btn btn-primary">搜索</button>
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增角色</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
-    	  <th>编号</th>
-        <th>名称</th>
-        <th>性别</th>
-        <th>生日</th>
-        <th>邮箱</th>
-        <th>QQ</th>
-        <th>手机号码</th>
-        <th>家庭电话</th>
-        <th>公司电话</th>
-        
-       
+        <th>角色id</th>
+        <th>角色名称</th>
+        <th>状态</th>
+        <th>操作</th>
     </tr>
     </thead>
-        <volist name="user" id="user">
 	     <tr>
-	     	
-            <td>{$i}</td>
-            <td>{$user.username}</td>
-            <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
-            <td>{$user.birthday}</td>
-            <td>{$user.email}</td>
-            <td>{$user.qq}</td>
-            <td>{$user.mobile_phone}</td>
-            <td>{$user.home_phone}</td>
-            <td>{$user.office_phone}</td>
-            <td><a href="detail.html?id={$user.id}">编辑</a></td>
-        </tr>
-      </volist>
-        </table>
-<div class="inline pull-right page">
-         10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
-</body>
-</html>
+            <td>5</td>
+            <td>管理员</td>
+            <td>1</td>
+            <td>
+                  <a href="edit.html">编辑</a>
+                  
+            </td>
+        </tr></table>
+		</body>
+		</html>
+
 <script>
     $(function () {
         

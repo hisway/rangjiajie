@@ -1,6 +1,9 @@
 <?php 
 
 Class MemberAction extends Action{
+	
+	    public static $val;
+	    
 	public function index(){
 		  $user=M('user');
 		  $res=$user->select();
@@ -32,9 +35,6 @@ Class MemberAction extends Action{
 	    'office_phone' => $office_phone
 	    );
 	    
-	    var_dump($data);
-	    
-	    	
 	    if(M('user')->add($data)){
 	    	
 	    	$this->success('添加成功',U(GROUP_NAME.'/Member/index'));
@@ -44,6 +44,23 @@ Class MemberAction extends Action{
 //$this->display('add');
 	
 	}
+	
+	public function detail(){
+		  $id=$this->_get('id');
+		  $user=M('user');
+		  $data=$user->where('id='.$id)->find();
+		  var_dump(self::$val=$data);
+		  $this->assign('user',$data);
+		  $this->display();
+		
+		}
+		
+	public function save(){
+		  
+		  var_dump(self::$val);
+		  $this->display('detail');
+		
+		}
 
 	
 }

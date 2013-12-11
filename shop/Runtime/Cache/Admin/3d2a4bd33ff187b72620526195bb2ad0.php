@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
     <title></title>
@@ -34,41 +34,36 @@
 </head>
 <body>
 <form class="form-inline definewidth m20" action="index.html" method="get">  
-    会员列表：
+    商品名称：
     <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
-    <button type="submit" class="btn btn-primary">搜索</button>
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增商品</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
-    	  <th>编号</th>
-        <th>名称</th>
-        <th>性别</th>
-        <th>生日</th>
-        <th>邮箱</th>
-        <th>QQ</th>
-        <th>手机号码</th>
-        <th>家庭电话</th>
-        <th>公司电话</th>
-        
-       
+        <th>商品编号</th>
+        <th>商品分类</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+        <th>是否上架</th>
+        <th>添加时间</th>
+        <th>管理操作</th>
     </tr>
     </thead>
-        <volist name="user" id="user">
-	     <tr>
-	     	
-            <td>{$i}</td>
-            <td>{$user.username}</td>
-            <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
-            <td>{$user.birthday}</td>
-            <td>{$user.email}</td>
-            <td>{$user.qq}</td>
-            <td>{$user.mobile_phone}</td>
-            <td>{$user.home_phone}</td>
-            <td>{$user.office_phone}</td>
-            <td><a href="detail.html?id={$user.id}">编辑</a></td>
-        </tr>
-      </volist>
+   <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$goods): $mod = ($i % 2 );++$i;?><tr>
+            <td><?php echo ($i); ?></td>
+            <td><?php echo ($goods["cat_id"]); ?></td>
+            <td><?php echo ($goods["goods_name"]); ?></td>
+            <td><?php echo ($goods["market_price"]); ?></td>
+            <td><?php if($goods["is_on_sale"] == 1 ): ?><font style="color:red">是</font>
+    <?php else: ?>否<?php endif; ?></td>
+            <td><?php echo ($goods["create_time"]); ?></td>
+            <td>
+                  <a href="edit.html">编辑</a>
+                   
+                  <a href="edit.html">删除</a>
+            </td>
+        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </table>
 <div class="inline pull-right page">
          10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
@@ -79,7 +74,7 @@
         
 		$('#addnew').click(function(){
 
-				window.location.href="add.html";
+				window.location.href="__URL__/detail";
 		 });
 
 

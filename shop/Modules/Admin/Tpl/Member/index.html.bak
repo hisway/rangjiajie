@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-<form class="form-inline definewidth m20" action="edit.html" method="get">  
+<form class="form-inline definewidth m20" action="index.html" method="get">  
     会员列表：
     <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">搜索</button>
@@ -66,7 +66,7 @@
             <td>{$user.mobile_phone}</td>
             <td>{$user.home_phone}</td>
             <td>{$user.office_phone}</td>
-            <td><a href="edit.html">编辑</a></td>
+            <td><a href="edit.html?id={$user.id}">编辑</a></td>
         </tr>
       </volist>
         </table>

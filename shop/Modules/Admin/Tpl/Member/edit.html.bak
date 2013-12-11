@@ -1,0 +1,67 @@
+<include file='Public:header'/>
+
+                <form action="{:U(GROUP_NAME.'/Member/save')}" method='post'>
+                    <table class="table table-bordered table-hover definewidth m10">
+                        <tr>
+                            <td align='right'>名称</td>
+                            <td>
+                                <input type="text"  name='users_name' value="{$user.username}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>性别</td>
+                            <td>
+                                <input type="text"  name='users_sex' value="{$user.sex}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>生日</td>
+                            <td>
+                                <input type="text"  name='users_birthday' value="{$user.birthday}"  /> 
+                            </td>
+                        </tr>
+            
+                        <tr>
+                            <td align='right'>邮箱</td>
+                            <td>
+                                <input type="text"  name='users_email' value="{$user.email}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>QQ</td>
+                            <td>
+                                <input type="text"  name='users_qq' value="{$user.qq}"/>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td align='right'>手机号码</td>
+                            <td>
+                                <input type="text"  name='users_phone' value="{$user.mobile_phone}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>家庭电话</td>
+                            <td>
+                                <input type="text"  name='users_homeNo' value="{$user.home_phone}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>公司电话</td>
+                            <td>
+                                <input type="text"  name='users_officeNo' value="{$user.office_phone}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align='center'>
+                                <input type="submit"  class="btn btn-primary" value='保存添加' />
+                                <a href="{:U(GROUP_NAME.'/Member/index')}" class="btn btn-success"  />返回列表</a>
+                            </td>
+                         </tr>
+                    </table>
+                </form>
+
+<!-- 
+<button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+ -->
+<include file='Public:bottom'/>
