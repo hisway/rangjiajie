@@ -3,11 +3,12 @@
 Class OrderAction extends Action{
 	public function index(){
 		
-// 		$order=M('order');
-// 		$list=$order->select();
-$list=M('order')->select();
+		$order=M('order');
+		$list=$order->select();
+		//dump($list);
 
-		var_dump($list);
+
+		//var_dump($list);
 		$count=100;
 		$this->assign('list',$list);
 		$this->assign('count',$count);
@@ -17,10 +18,11 @@ $list=M('order')->select();
   // 订单列表
 	public function all(){
 		$order=M('order');
-		$res=$order->where("city=10")->select();
+		$res=$order->where("")->select();
 		
-		var_dump($res);
+		echo "<pre>";
 		print_r($res);
+		echo "</pre>";
 		
 		}
 		
