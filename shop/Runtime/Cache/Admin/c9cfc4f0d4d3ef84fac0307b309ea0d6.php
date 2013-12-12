@@ -36,6 +36,7 @@
 
                 <form action="<?php echo U(GROUP_NAME.'/Member/save');?>" method='post'>
                     <table class="table table-bordered table-hover definewidth m10">
+                    	          <input type="hidden" name="users_id" value="<?php echo ($user["id"]); ?>"/>
                         <tr>
                             <td align='right'>名称</td>
                             <td>
@@ -45,7 +46,10 @@
                         <tr>
                             <td align='right'>性别</td>
                             <td>
-                                <input type="text"  name='users_sex' value="<?php if($user["sex"] == 1): ?>男 <?php else: ?>女<?php endif; ?>"/>
+                                <input type="radio"  name='users_sex' value="1"
+                                <?php if(($user["sex"]) == "1"): ?>checked<?php endif; ?> />男
+                                <input type="radio"  name='users_sex' value="0"
+                                <?php if(($user["sex"]) == "0"): ?>checked<?php endif; ?> />女
                             </td>
                         </tr>
                         <tr>
