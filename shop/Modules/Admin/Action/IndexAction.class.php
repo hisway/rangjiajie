@@ -1,6 +1,6 @@
 <?php 
 
-Class IndexAction extends Action{
+Class IndexAction extends CommonAction{
 	public function index(){
 	    $this->display();
 	}
@@ -8,7 +8,7 @@ Class IndexAction extends Action{
 	public function loginout(){
 		session_unset();
 		session_destroy();
-		$this->redirect('Admin/Login/index');
+		$this->redirect('Login/index');
 	}
 
 	

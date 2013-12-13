@@ -1,6 +1,6 @@
 <?php 
 
-Class GoodsAction extends Action{
+Class GoodsAction extends CommonAction{
 	public function index(){
 		
 		$goods=M('goods');

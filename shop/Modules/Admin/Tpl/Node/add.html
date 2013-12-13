@@ -1,6 +1,6 @@
 <include file='Public:header'/>
 
-                <form action="{:U(GROUP_NAME.'/Role/add')}" method='post'>
+                <form action="{:U(GROUP_NAME.'/Node/addNode')}" method='post'>
                     <table class="table table-bordered table-hover definewidth m10">
                         <tr>
                             <td align='right'>中文名称</td>
@@ -36,14 +36,11 @@
 
                          <tr>
                             <td colspan="2" align='center'>
-                                <input type="submit"  class="btn btn-primary" value='保存添加' />
-                                <a href="{:U(GROUP_NAME.'/Role/index')}" class="btn btn-success"  />返回列表</a>
+                                <button type="submit" class="btn btn-primary" type="button">保存</button> &nbsp;&nbsp;
+                                <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
                             </td>
                          </tr>
                     </table>
                 </form>
 
-<!-- 
-<button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
- -->
 <include file='Public:bottom'/>
