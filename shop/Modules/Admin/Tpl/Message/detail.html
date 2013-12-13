@@ -1,0 +1,46 @@
+<include file='Public:header'/>
+
+                <form action="{:U(GROUP_NAME.'/Message/modify')}" method='post'>
+                    <table class="table table-bordered table-hover definewidth m10">
+                     <input type="hidden"  name='goods_id' value="{$list.goods_id}"/>
+                        <tr>
+                            <td class="tableleft">商品</td>
+                            <td>
+                                {$list['goods_name']}
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="tableleft">用户</td>
+                            <td>
+                             <font style="color:red"> {$list['username']}</font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tableleft">用户评论</td>
+                            <td>
+                               {$list['content']}
+                            </td>
+                        </tr>
+                            <td class="tableleft">是否显示</td>
+                            <td>
+                            	<if condition="$list.is_show eq 1 ">
+                                <input type="radio"  name='is_show' value='1' checked />启用
+                                <input type="radio"  name='is_show' value='0' />禁用
+                             <else />
+                             	 <input type="radio"  name='is_show' value='1' />启用
+                                <input type="radio"  name='is_show' value='0' checked />禁用
+                              </if>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td colspan="2" align='center'>
+                                
+                                <input type="submit"  class="btn btn-primary" value='保存添加' />
+                                <a href="{:U(GROUP_NAME.'/Message/index')}" class="btn btn-success"  />返回列表</a>      
+                            </td>
+                         </tr>
+                    </table>
+                </form>
+
+<include file='Public:bottom'/>

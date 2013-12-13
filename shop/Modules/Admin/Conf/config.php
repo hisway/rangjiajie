@@ -1,6 +1,7 @@
 <?php
 return array(
 	//后台常量配置
+	'URL_MODEL' => 3,
 	'TMPL_PARSE_STRING'=>array(
 		'__PUBLIC__'=>__ROOT__.'/'.APP_NAME.'/Modules/'.GROUP_NAME.'/Tpl/Public',
 		),
@@ -14,6 +15,9 @@ return array(
         'AUTH_RULE' => 'ws_auth_rule', //权限规则表
         'AUTH_USER' => 'ws_admin'//用户信息表
     ),
+    
+    
+   
 
 
 

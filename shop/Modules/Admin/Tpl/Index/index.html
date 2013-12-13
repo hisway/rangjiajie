@@ -1,6 +1,5 @@
-
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>后台管理系统</title>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -50,18 +49,20 @@
           [
             {text:'商品管理',items:
               [
-                {id:'1',text:'商品列表',href:"__GROUP__/Goods/index"},
+
+                {id:'1',text:'商品列表',href:'__GROUP__/Goods/index'},
                 {id:'2',text:'添加商品',href:'__GROUP__/Goods/detail'},
-                {id:'3',text:'推荐商品',href:'__GROUP__/Node/index.html'},
-                {id:'4',text:'下架商品',href:'__GROUP__/Node/index.html'}
+                {id:'3',text:'推荐商品',href:'__GROUP__/Recommend'},
+                {id:'4',text:'下架商品',href:'__GROUP__/Off_sale'}
               ]
             },
             {text:'商品属性管理',items:
               [
-                {id:'5',text:'品牌管理',href:'__GROUP__/Node/index.html'},
-                {id:'6',text:'商品分类',href:'__GROUP__/Node/index.html'},
-                {id:'7',text:'商品评论',href:'__GROUP__/Node/index.html'},
-                {id:'8',text:'商品关键字',href:'__GROUP__/Node/index.html'}
+
+                {id:'5',text:'品牌管理',href:'__GROUP__/Brand/'},
+                {id:'6',text:'商品分类',href:'__GROUP__/Cate/'},
+                {id:'7',text:'商品评论',href:'__GROUP__/Message/'},
+                {id:'8',text:'商品关键字',href:'__GROUP__/Keyword/'}
               ]
             }
           ]
