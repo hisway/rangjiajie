@@ -1,0 +1,113 @@
+<include file='Public:header'/>
+
+                <form action="{:U(GROUP_NAME.'/Brand/add')}" method='post'>
+                    <table class="table table-bordered table-hover definewidth m10">
+                     
+                        <tr>
+                            <td class="tableleft">分类名称</td>
+                            <td>
+              <select id="c1" name="c1"></select>
+						  <select id="c2" name="c2"></select>
+						  <select id="c3" name="c3"></select>
+						   <select id="c4"name="c4"></select>
+						  <input type="hidden" id="category" name="category" value="{$category}"><br/>
+	    </td>       
+                        </tr>
+                        <tr>
+                            <td class="tableleft">拥有品牌</td>
+                            <td>
+                                <select id="get_brand" name="brand_id">
+                               	
+		               
+		          </select>
+                                
+                                 
+                            </td>
+                        </tr>
+                        
+                       <tr>
+                            <td class="tableleft">添加品牌</td>
+                           
+                               <td><input type="text" name="brand_name">
+            </td>
+                                 
+                           
+                        </tr> 
+                        
+                            <td class="tableleft">是否显示</td>
+                            <td>
+                                <input type="radio"  name='is_show' value='1' checked="checked"/>启用
+                                <input type="radio"  name='is_show' value='0'/>禁用
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td colspan="2" align='center'>
+                                <input type="hidden" name='id' value="{$rule.id}">
+                                <input type="submit"  class="btn btn-primary" value='保存添加' />
+                                <a href="{:U(GROUP_NAME.'/Brand/index')}" class="btn btn-success"  />返回列表</a>      
+                            </td>
+                         </tr>
+                    </table>
+                </form>
+
+<include file='Public:bottom'/>
+	<script>
+    $(function () {   
+    	 set_category('', 1, '');        
+    
+    
+
+    
+     $("#c1").change(function(){
+          $("#get_brand")[0].options.length=0;
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c1").val(), function(data){
+          $.each(data, function(i,data){  
+          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
+      });
+                      
+        });
+         return false;  
+    });
+    
+    $("#c2").change(function(){
+    	 $("#get_brand")[0].options.length=0;
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c2").val(), function(data){
+          $.each(data, function(i,data){  
+          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
+      });
+                         
+        });
+         return false; 
+    });
+    $("#c3").change(function(){
+    	 $("#get_brand")[0].options.length=0;
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c3").val(), function(data){
+          $.each(data, function(i,data){  
+          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
+      });
+                      
+        });
+         return false;  
+    });
+    $("#c4").change(function(){
+    	 $("#get_brand")[0].options.length=0;
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c4").val(), function(data){
+          $.each(data, function(i,data){  
+          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
+      });
+                          
+        });
+        return false; 
+    });
+     
+    
+    }); 
+    
+    
+ 
+    
+    
+
+  
+</script>

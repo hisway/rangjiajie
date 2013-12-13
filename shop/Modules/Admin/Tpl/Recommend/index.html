@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/default.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+    
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" action="index.html" method="get">  
+    商品名称：
+    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <button type="submit" class="btn btn-primary">查询</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>商品编号</th>
+        <th>商品分类</th>
+        <th>商品名称</th>
+        <th>商品价格</th>       
+        <th>添加时间</th>
+        
+        <th>重发 &nbsp;<input type="checkbox" id="chk_btn_allrepeat" name="chk_btn_allrepeat" value="1" style="margin-top:4px;"></th>
+        <th>取消推荐&nbsp;<input type="checkbox" id="chk_btn_alldelete" name="chk_btn_alldelete"  value="1" style="margin-top:4px;" ></th>
+   
+   
+    </tr>
+    </thead>
+   <volist name="list"  id="goods">
+	     <tr>
+            <td>{$i}</td>
+            <td>{$goods.cat_id}</td>
+            <td>{$goods.goods_name}</td>
+            <td>{$goods.market_price}</td>     
+            <td><span id='btn_pubDate_{$goods.id}'>{$goods.create_time}</span></td>
+            
+            
+            <td>
+                  <a id="btn_repeat_{$goods.id}" rel='{$goods.id}' style='cursor:pointer'>重发</a>&nbsp;&nbsp;<input type="checkbox" id="chk_btn_repeat_{$goods.id}" name="chk_btn_repeat_[]" value="{$goods.id}" style="margin-top:4px;">
+            </td>
+            
+            <td>
+                  <a id="btn_delete_{$goods.id}" rel='{$goods.id}' style='cursor:pointer'>取消推荐</a>&nbsp;&nbsp;<input type="checkbox" id="chk_btn_delete_{$goods.id}" name="chk_btn_delete_[]" value="{$goods.id}" style="margin-top:4px;">
+            </td>
+        
+        
+        
+        </tr>
+        
+        
+      </volist>
+        </table>
+           <table class="table definewidth m10">
+           	<tr>
+           	<td style="border:0px solid white">	
+        <button  class="btn btn-primary" name="btn_repeats"  id="btn_repeats" type="button">重发 </button>
+      &nbsp;&nbsp;
+        <button  class="btn btn-success" name="btn_deletes"  id="btn_deletes" type="button">取消推荐</button>
+            </td>
+          <tr/></table>
+<div class="inline pull-right page">
+        {$page}  </div>
+</body>
+</html>
+	<script>
+    $(function () {
+		checkAll('chk_btn_allrepeat','chk_btn_repeat_');
+		checkAll('chk_btn_alldelete','chk_btn_delete_');
+		
+$('[id^=btn_repeat_]').each( function () {
+
+     $(this).click( function () {
+       var id=$(this).attr('rel');
+       if (id != '') {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost/rangjiajie/index.php/Admin/Recommend/modify/id/"+id,
+            success: function(status) {
+
+             if(status) $("#btn_pubDate_"+id).html("<font color='green'>"+status+"</font>");
+            }
+          });
+       } 
+    });
+  });
+  
+  $('[id^=btn_delete_]').each( function () {
+
+     $(this).click( function () {
+       var id=$(this).attr('rel');
+       if (id != '') {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost/rangjiajie/index.php/Admin/Recommend/unrecommend/id/"+id,
+              success: function(status){
+              
+            	window.location.href="http://localhost/rangjiajie/index.php/Admin/Recommend/index"            	
+            }  ,
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert(XMLHttpRequest +':'+ textStatus +':'+ errorThrown);
+    } 
+          });
+       } 
+    });
+  });
+  
+  
+    $("#btn_repeats").click( function () {    	
+     $('[id^=chk_btn_repeat_]').each( function () {
+     	 if($(this).prop("checked")==true){
+       var id=$(this).attr("value");           
+       if (id != '') {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/rangjiajie/index.php/Admin/Recommend/modify/id/"+id,
+            success: function(status) {
+
+             if(status) $("#btn_pubDate_"+id).html("<font color='green'>"+status+"</font>");
+            },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert(XMLHttpRequest +':'+ textStatus +':'+ errorThrown);
+    } 
+          });
+       }  
+     }
+    });
+ });
+
+
+$("#btn_deletes").click( function () {
+     $('[id^=chk_btn_delete_]').each( function () {
+     	 if($(this).prop("checked")==true){
+       var id=$(this).prop('value');
+if (id != '') {
+          $.ajax({
+            type: "GET",
+            url: "http://localhost/rangjiajie/index.php/Admin/Recommend/unrecommend/id/"+id,
+              success: function(status){
+              
+            	window.location.href="http://localhost/rangjiajie/index.php/Admin/Recommend/index"            	
+            }  ,
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert(XMLHttpRequest +':'+ textStatus +':'+ errorThrown);
+    } 
+          });
+       } 
+}
+ });
+ 
+ });
+ 
+    });
+		
+</script>
