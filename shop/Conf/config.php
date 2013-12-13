@@ -23,7 +23,7 @@ return array(
     //'SESSION_TYPE'=>'Db',
     //'LOAD_EXT_CONFIG'=>'',	//加载配置文件
 
-    //'SHOW_PAGE_TRACE' => TRUE,
+    'SHOW_PAGE_TRACE' => TRUE,
     //'URL_MODEL'=>3,
     //'URL_ROUTER_ON'=>TRUE,
 
