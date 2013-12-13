@@ -62,7 +62,31 @@
     </tr>
    
    
-   
+    <tr>
+        <td width="10%" class="tableleft">品牌分类</td>
+        <td>
+           <select name="parent_id" size="1">
+		          <option value="0">-----请选择商品分类-----</option>
+		          <volist name="alist" id="vo">
+		          <option value="{$vo['cat_id']}">
+		          	<?php
+		          	for($i=0;$i<$vo['count']*3;$i++)
+		          	{
+		          		echo '&nbsp;';
+		          	}
+		          	
+		          	?>
+		          	
+		          	{$vo['cat_name']}
+		          	
+		          	
+		          </option>	
+		          	
+		          	
+		          	
+		          </volist>  
+		          </select></td>
+    </tr>
    <tr>
         <td width="10%" class="tableleft">商品分类</td>
         <td><input type="text" name="cat_name" >
