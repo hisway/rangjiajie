@@ -1,0 +1,8 @@
+<?php
+class OrderModel extends Model{
+	   protected $field =array(
+	   'id','addtime','order_id','user_id','order_status','pay_status'
+	   
+	   );
+	
+	}

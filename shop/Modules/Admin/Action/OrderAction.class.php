@@ -6,9 +6,6 @@ Class OrderAction extends Action{
 		$order=M('order');
 		$list=$order->select();
 		//dump($list);
-
-
-		//var_dump($list);
 		$count=100;
 		$this->assign('list',$list);
 		$this->assign('count',$count);
