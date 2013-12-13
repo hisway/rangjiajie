@@ -1,0 +1,52 @@
+<include file='Public:header'/>
+{:U(GROUP_NAME)}
+<BR>
+__GROUP__
+<form class="form-inline definewidth m20" action="index.html" method="get">  
+    节点名称：
+    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增节点</button>
+</form>
+
+            <form action="{:U(GROUP_NAME.'/Node/sortAuth')}" method='post'>
+                <table class="table table-bordered table-hover definewidth m10">
+                    <thead>
+                        <tr>
+                            <th>订单编码</th>
+                            <th>下单时间</th>
+                            <th>收货人</th>
+                            <th>总金额</th>
+                            <th>应付金额</th>
+                            <th>订单状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                        <tr>
+                            <td>{$v.order_id}</td>
+                            <td>{$v.user_id}</td>
+                            <td>{$v.addtime}</td>
+                            <td>{$v.order_status}</td>
+                            <td>
+                                <input  type="text"  class='input-mini' name='{$v.id}' value='{$v.sort}'/>
+                            </td>
+                            <td><if condition='$v.status eq 1'>启用<else />禁用</if></td>
+                            <td>
+                                <a href="{:U(GROUP_NAME.'/Node/addAuth',array('id'=>$v['id']))}"><i class="icon-plus"></i></a>
+                                <a href="{:U(GROUP_NAME.'/Node/edit',array('id'=>$v['id']))}"><i class="icon-pencil"></i></a>
+                                <a href="{:U(GROUP_NAME.'/Node/del',array('id'=>$v['id']))}"><i class="icon-remove"></i></a>
+                            </td>
+                        </tr>
+                    </foreach>
+                    <tr>
+                        <td colspan='5'>
+                            <input type="submit" class="btn btn-primary" value='排序'/>
+                        </td>
+                    </tr>
+                    <tbody>
+                </table>
+            </form>
+<div class="inline pull-right page">
+         {$count} 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
+<include file='Public:bottom'/>
