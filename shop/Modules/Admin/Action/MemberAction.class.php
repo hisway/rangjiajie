@@ -48,7 +48,7 @@ Class MemberAction extends Action{
 	public function detail(){
 		  $id=$this->_get('id');
 		  $user=M('user');
-		  $data=$user->where('id='.$id)->find();
+		  $data=$user->where("id=%d",$id)->find();
 		  $this->assign('user',$data);
 		  $this->display();
 		
@@ -78,7 +78,7 @@ Class MemberAction extends Action{
 	    'home_phone' => $home_phone,
 	    'office_phone' => $office_phone
 	    );
-	    var_dump($_POST);
+	    //var_dump($_POST);
 		  $user=M('user');
       if($user->save($data) > 0){
 		  
@@ -88,5 +88,14 @@ Class MemberAction extends Action{
     }
 	   // $this->display('detail');
    }
+   
+   public function search(){
+   	$username=$this->_post('users_name');
+   	$user=M('user');
+   	$res=$user->where("username like '%$username%' ")->select();
+   	//var_dump($username);
+   	$this->assign('user',$res);
+   	$this->display();
+   	}
  }
 ?>

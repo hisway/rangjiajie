@@ -33,9 +33,9 @@
     </style>
 </head>
 <body>
-<form class="form-inline definewidth m20" action="index.html" method="get">  
+<form class="form-inline definewidth m20" action="{:U(GROUP_NAME.'/Member/search')}" method="post">  
     会员列表：
-    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <input type="text" name="users_name" id="rolename"class="abc input-default" placeholder="请输入用户名" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">搜索</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" >
@@ -66,7 +66,7 @@
             <td>{$user.mobile_phone}</td>
             <td>{$user.home_phone}</td>
             <td>{$user.office_phone}</td>
-            <td><a href="edit.html?id={$user.id}">编辑</a></td>
+            <td><a href="detail.html?id={$user.id}">编辑</a></td>
         </tr>
       </volist>
         </table>
