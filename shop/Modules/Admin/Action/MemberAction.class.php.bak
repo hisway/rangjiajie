@@ -92,7 +92,7 @@ Class MemberAction extends Action{
   		$id=$this->_post('id');
   		var_dump($_POST);
   		$user=M('user');
-  		if($user->where('id=%d',$id)->setField('rank_points',$rank_points)>0){
+  		if($user->where('id=%d',$id)->setField('rank_points',$rank_points)){
   			$this->success('修改成功',U(GROUP_NAME.'/Member/index'));
   		}else{
   			$this->error('修改失败');

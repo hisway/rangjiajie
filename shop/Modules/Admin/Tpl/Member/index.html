@@ -38,6 +38,7 @@
     <input type="text" name="users_name" class="abc input-default" placeholder="请输入用户名" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">搜索</button>
 </form>
+ <form action="{:U(GROUP_NAME.'/Member/setField')}" method="post">
 <table class="table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
@@ -62,7 +63,7 @@
             <td>{$user.username}</td>
             <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
             <td>{$user.birthday}</td>
-            <form action="{:U(GROUP_NAME.'/Member/setField')}" mehod="post"><td><input type="text" name="rank_points" value="{$user.rank_points}" /><a href="{:U(GROUP_NAME.'/Member/setField')}?id={$user.id}" class="btn btn-success">修改</a></td></form>
+            <form action="{:U(GROUP_NAME.'/Member/setField')}" method="post"><td><input type="hidden" name="id" value="{$user.id}"/><input type="text" name="rank_points" value="{$user.rank_points}" /><button type="submit" class="btn btn-primary">修改</button></td></form>
             <td>{$user.email}</td>
             <td>{$user.qq}</td>
             <td>{$user.mobile_phone}</td>
@@ -73,6 +74,7 @@
         </tr>
       </volist>
         </table>
+        </form>
 <div class="inline pull-right page">
          10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
 </body>

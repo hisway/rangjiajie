@@ -38,58 +38,58 @@
 
                 <form action="<?php echo U(GROUP_NAME.'/Member/save');?>" method='post'>
                     <table class="table table-bordered table-hover definewidth m10">
-                    	          <input type="hidden" name="users_id" value="<?php echo ($user["id"]); ?>"/>
+                    	          <input type="hidden" name="id" value="<?php echo ($user["id"]); ?>"/>
                         <tr>
                             <td align='right'>名称</td>
                             <td>
-                                <input type="text"  name='users_name' value="<?php echo ($user["username"]); ?>"/>
+                                <input type="text"  name='username' value="<?php echo ($user["username"]); ?>"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>性别</td>
                             <td>
-                                <input type="radio"  name='users_sex' value="1"
+                                <input type="radio"  name='sex' value="1"
                                 <?php if(($user["sex"]) == "1"): ?>checked<?php endif; ?> />男
-                                <input type="radio"  name='users_sex' value="0"
+                                <input type="radio"  name='sex' value="0"
                                 <?php if(($user["sex"]) == "0"): ?>checked<?php endif; ?> />女
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>生日</td>
                             <td>
-                                <input type="text"  name='users_birthday' value="<?php echo ($user["birthday"]); ?>"  /> 
+                                <input type="text"  name='birthday' value="<?php echo ($user["birthday"]); ?>"  /> 
                             </td>
                         </tr>
             
                         <tr>
                             <td align='right'>邮箱</td>
                             <td>
-                                <input type="text"  name='users_email' value="<?php echo ($user["email"]); ?>"/>
+                                <input type="text"  name='email' value="<?php echo ($user["email"]); ?>"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>QQ</td>
                             <td>
-                                <input type="text"  name='users_qq' value="<?php echo ($user["qq"]); ?>"/>
+                                <input type="text"  name='qq' value="<?php echo ($user["qq"]); ?>"/>
                             </td>
                         </tr>
 
                          <tr>
                             <td align='right'>手机号码</td>
                             <td>
-                                <input type="text"  name='users_phone' value="<?php echo ($user["mobile_phone"]); ?>"/>
+                                <input type="text"  name='mobile_phone' value="<?php echo ($user["mobile_phone"]); ?>"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>家庭电话</td>
                             <td>
-                                <input type="text"  name='users_homeNo' value="<?php echo ($user["home_phone"]); ?>"/>
+                                <input type="text"  name='home_phone' value="<?php echo ($user["home_phone"]); ?>"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>公司电话</td>
                             <td>
-                                <input type="text"  name='users_officeNo' value="<?php echo ($user["office_phone"]); ?>"/>
+                                <input type="text"  name='office_phone' value="<?php echo ($user["office_phone"]); ?>"/>
                             </td>
                         </tr>
                         <tr>

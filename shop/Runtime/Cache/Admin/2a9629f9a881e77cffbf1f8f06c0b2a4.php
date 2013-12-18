@@ -38,6 +38,7 @@
     <input type="text" name="users_name" class="abc input-default" placeholder="请输入用户名" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">搜索</button>
 </form>
+ <form action="<?php echo U(GROUP_NAME.'/Member/setField');?>" method="post">
 <table class="table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
@@ -45,6 +46,7 @@
         <th>名称</th>
         <th>性别</th>
         <th>生日</th>
+        <th>积分管理</th>
         <th>邮箱</th>
         <th>QQ</th>
         <th>手机号码</th>
@@ -60,14 +62,17 @@
             <td><?php echo ($user["username"]); ?></td>
             <td><?php if($user["sex"] == 1 ): ?>男<?php else: ?>女<?php endif; ?></td>
             <td><?php echo ($user["birthday"]); ?></td>
+            <form action="<?php echo U(GROUP_NAME.'/Member/setField');?>" method="post"><td><input type="hidden" name="id" value="<?php echo ($user["id"]); ?>"/><input type="text" name="rank_points" value="<?php echo ($user["rank_points"]); ?>" /><button type="submit" class="btn btn-primary">修改</button></td></form>
             <td><?php echo ($user["email"]); ?></td>
             <td><?php echo ($user["qq"]); ?></td>
             <td><?php echo ($user["mobile_phone"]); ?></td>
             <td><?php echo ($user["home_phone"]); ?></td>
             <td><?php echo ($user["office_phone"]); ?></td>
             <td><a href="detail.html?id=<?php echo ($user["id"]); ?>">编辑</a></td>
+            <td><a onclick="return del(<?php echo ($user["id"]); ?>)" href="<?php echo U(GROUP_NAME.'/Member/delUser');?>?id=<?php echo ($user["id"]); ?>">删除</a></td>
         </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </table>
+        </form>
 <div class="inline pull-right page">
          10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
 </body>
