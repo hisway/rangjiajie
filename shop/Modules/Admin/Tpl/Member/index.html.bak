@@ -45,6 +45,7 @@
         <th>名称</th>
         <th>性别</th>
         <th>生日</th>
+        <th>积分管理</th>
         <th>邮箱</th>
         <th>QQ</th>
         <th>手机号码</th>
@@ -61,12 +62,17 @@
             <td>{$user.username}</td>
             <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
             <td>{$user.birthday}</td>
+            <td><form action="{:U(GROUP_NAME.'/Member/setField')}" mehod="post"><input type="text" name="rank_points" value="{$user.rank_points}" /><a href="{:U(GROUP_NAME.'/Member/setField')}?id={$user.id}" class="btn btn-success">修改</a></td></form>
             <td>{$user.email}</td>
             <td>{$user.qq}</td>
             <td>{$user.mobile_phone}</td>
             <td>{$user.home_phone}</td>
             <td>{$user.office_phone}</td>
             <td><a href="detail.html?id={$user.id}">编辑</a></td>
+<<<<<<< HEAD
+=======
+            <td><a onclick="return del({$user.id})" href="{:U(GROUP_NAME.'/Member/delUser')}?id={$user.id}">删除</a></td>
+>>>>>>> 完成删除功能，积分管理完善中
         </tr>
       </volist>
         </table>

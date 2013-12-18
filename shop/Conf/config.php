@@ -26,6 +26,9 @@ return array(
     'SHOW_PAGE_TRACE' => TRUE,
     //'URL_MODEL'=>3,
     //'URL_ROUTER_ON'=>TRUE,
+    
+    'DB_FIELDS_CACHE'=>false,
+
 
 
 );
