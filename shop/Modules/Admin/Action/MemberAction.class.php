@@ -1,13 +1,18 @@
 <?php 
-
+import("ORG.Util.Page");// 导入分页类
 Class MemberAction extends Action{
 	
 	    
 	public function index(){
-		  $user=M('user');
-		  $res=$user->select();
-		  //var_dump($res);
-		  $this->assign('user',$res);
+		  
+		  $user =M('user');
+		  $count= $user->count();// 查询满足要求的总记录数
+		  $Page = new Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
+		  $list = $user->limit($Page->firstRow.','.$Page->listRows)->select();
+			$show = $Page->show();// 分页显示输出
+			$this->assign('page',$show);// 赋值分页输出
+		  $this->assign('user',$list);// 赋值数据集
+		   //var_dump($list);
 	    $this->display();
 	}
 	
@@ -46,6 +51,7 @@ Class MemberAction extends Action{
 	public function save(){
 	    //var_dump($_POST);
       $data=array(
+      'id' => $this->_post('id'),
       'username' => $this->_post('username'),
       'sex' => $this->_post('sex'),
       'birthday' => $this->_post('birthday'),
@@ -67,11 +73,16 @@ Class MemberAction extends Action{
    }
    
    public function search(){
-   	$username=$this->_post('users_name');
-   	$user=M('user');
-   	$res=$user->where("username like '%$username%' ")->select();
-   	//var_dump($username);
-   	$this->assign('user',$res);
+   	$username=I('users_name');
+   	$user = M('user');
+   	$count= $user->where("username like '%$username%' ")->count();// 查询满足要求的总记录数
+		$Page = new Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
+   	$list = $user->where("username like '%$username%' ")->limit($Page->firstRow.','.$Page->listRows)->select();
+   	//$list = $user->where("username like '%$username%' ")->page($_GET['p'].',2')->select();
+   	$show = $Page->show();// 分页显示输出
+		$this->assign('page',$show);// 赋值分页输出
+   	$this->assign('user',$list);
+   	//var_dump($list);
    	$this->display();
    	}
    

@@ -62,7 +62,7 @@
             <td><?php echo ($user["username"]); ?></td>
             <td><?php if($user["sex"] == 1 ): ?>男<?php else: ?>女<?php endif; ?></td>
             <td><?php echo ($user["birthday"]); ?></td>
-            <form action="<?php echo U(GROUP_NAME.'/Member/setField');?>" method="post"><td><input type="hidden" name="id" value="<?php echo ($user["id"]); ?>"/><input type="text" name="rank_points" value="<?php echo ($user["rank_points"]); ?>" /><button type="submit" class="btn btn-primary">修改</button></td></form>
+            <form action="<?php echo U(GROUP_NAME.'/Member/setField');?>" method="post"><td><input type="hidden" name="id" value="<?php echo ($user["id"]); ?>"/><input type="text" style="width:120px;" name="rank_points" value="<?php echo ($user["rank_points"]); ?>" /><button type="submit" class="btn btn-primary">修改</button></td></form>
             <td><?php echo ($user["email"]); ?></td>
             <td><?php echo ($user["qq"]); ?></td>
             <td><?php echo ($user["mobile_phone"]); ?></td>
@@ -74,7 +74,8 @@
         </table>
         </form>
 <div class="inline pull-right page">
-         10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
+         <?php echo ($page); ?>
+</div>
 </body>
 </html>
 <script>
