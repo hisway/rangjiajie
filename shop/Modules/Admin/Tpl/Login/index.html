@@ -57,10 +57,9 @@
         <input type="text" name="username" class="input-large" placeholder="账号">
         <input type="password" name="password" class="input-large" placeholder="密码">
         <input type="text" name="code" class="input-medium" placeholder="验证码">
-        <img src="{:U(GROUP_NAME.'/Login/verify')}" id="code"/> 
-        <a href="javascript:void(change_code(this));">换一个</a>
+        <img src="{:U(GROUP_NAME.'/Login/verify')}" id="code" onclick="change_code(this)"/> 
        
-        <p><button class="btn btn-large btn-primary" type="submit">登录</button></p>
+        <p><button id="login" class="btn btn-large btn-primary" type="submit">登录</button></p>
     </form>
 
 </div>

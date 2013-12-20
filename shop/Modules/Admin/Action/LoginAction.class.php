@@ -47,7 +47,15 @@ Class LoginAction extends Action{
  			echo 1;//正常
  		}
  	}
-	
+
+	public function checkpassword(){
+ 		$username = I('username');
+ 		$password = I('password');
+ 		$user = M('admin')->where(array('username'=>$username))->find();
+ 		if ($user&&$user['password']==$password) {
+ 			echo 1;//正常
+ 		}
+ 	}
 
 }
 ?>
