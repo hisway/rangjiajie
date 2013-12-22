@@ -91,7 +91,7 @@
             },
             {text:'会员等级管理',items:
               [
-                {id:'1',text:'会员等级',href:'__GROUP__/Node/index.html'},
+                {id:'1',text:'会员等级',href:'__GROUP__/Member/grade.html'},
                 {id:'2',text:'添加等级',href:'__GROUP__/Node/index.html'}
               ]
             },
