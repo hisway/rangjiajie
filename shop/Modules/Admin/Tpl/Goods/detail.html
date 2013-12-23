@@ -11,12 +11,10 @@
     <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
-    
     <script type="text/javascript" src="__PUBLIC__/Js/cate_de.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
-    
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>    
     <style type="text/css">
         body {
             padding-bottom: 40px;
@@ -43,30 +41,39 @@
         <td width="10%" class="tableleft">产品名称</td>
         <td><input type="text" name="goods_name"/></td>
     </tr>
-    
+    <tr>
+        <td width="10%" class="tableleft">产品二维码</td>
+        <td><input type="text" name="goods_sn"/></td>
+    </tr>
     <tr>
     	<td class="tableleft">产品类别</td>
     	<td>
     <select id="c1" name="c1"></select>
 						  <select id="c2" name="c2"></select>
 						  <select id="c3" name="c3"></select>
-						   <select id="c4" name="c4"></select>
-						  <input type="hidden" id="category" name="category" value="{$category}"><br />
+						  <select id="c4" name="c4"></select>
+						  <input type="hidden" id="category" name="cat_id" value="{$category}"><br/>
 	    </td>       
 		</tr>
 		
     <tr>
         <td class="tableleft">产品品牌</td>
         <td>
-        	<select  id="get_brand" name="brand_id" size="1">
-		          <option value="0">请选择品牌</option>          
+        	<select  id="get_brand" name="brand_id" size="1">              
 		</select> 
 		</td>
     </tr>    
-    <tr>
-        <td width="10%" class="tableleft">关键字</td>
-        <td><input type="text" name="keywords"/></td>
-    </tr>
+       <tr>
+                            <td class="tableleft">拥有属性</td>
+                            <td>
+                            <select id="get_Key" name="kid">
+                               	
+		               
+		                        </select>
+                                
+                                 
+                            </td>
+                        </tr>
     
     
     
@@ -94,17 +101,18 @@
         <td width="10%" class="tableleft">市场价</td>
         <td><input type="text" name="market_price"/></td>
     </tr>
-     
-    <tr>
+  
+    <tr id="pro_list">
         <td width="10%" class="tableleft">促销价</td>
         <td><input type="text" name="promote_price"/></td>
     </tr>
     
-     <tr>
+     <tr id="pro_list1">
         <td width="10%" class="tableleft">促销时间</td>
         <td><input type="text" name="promote_start_date"/> - <input type="text" name="promote_end_date"/></td>
     </tr>
-    
+   
+   
     <tr>
         <td width="10%" class="tableleft">产品图片</td>
         <td><input type="file" name="goods_img"></td>
@@ -113,7 +121,7 @@
     
      <tr>
         <td width="10%" class="tableleft">产品描述</td>
-        <td><textarea name="good_desc" id="myEditor" ></textarea></td>
+        <td><textarea name="goods_desc" id="myEditor" ></textarea></td>
     </tr>
     
     
@@ -125,6 +133,7 @@
         </td>
     </tr>
 </table>
+          
 </form>
 </body>
 </html>
@@ -134,14 +143,15 @@
 
 
 <script>
-    $(function () {   
+    $(function () {  
+    	  	 
     	 set_category('', 1, '');        
     
     $('#backid').click(function(){
-				window.location.href="index.html";
+				window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods";
 		 });
 
-    
+    //品牌
      $("#c1").change(function(){
           $("#get_brand")[0].options.length=0;
           $("#get_brand").prepend("<option value='0'>请选择品牌</option>");  
@@ -191,9 +201,74 @@
     });
      
     
+ 
+    //关键字属性
+    $("#c1").change(function(){
+          $("#get_Key")[0].options.length=0;
+           	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c1").val(), function(data){
+          $.each(data, function(i,data){  
+         if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                      
+        });
+         return false;  
+    });
+    
+    $("#c2").change(function(){
+    	 $("#get_Key")[0].options.length=0;
+    	  	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c2").val(), function(data){
+          $.each(data, function(i,data){  
+          if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                         
+        });
+         return false; 
+    });
+    $("#c3").change(function(){
+    	 $("#get_Key")[0].options.length=0;
+    	  	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c3").val(), function(data){
+          $.each(data, function(i,data){
+          	if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                      
+        });
+         return false;  
+    });
+    $("#c4").change(function(){
+    	 $("#get_Key")[0].options.length=0;
+    	  	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c4").val(), function(data){
+          $.each(data, function(i,data){  
+          if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                          
+        });
+        return false; 
+    });
+     
+    
     }); 
     
-    
+  
  
 </script>
 
@@ -204,5 +279,21 @@
         initialFrameWidth : 680,
         initialFrameHeight: 200
     });
+ 
+ 
+ //促销 
+     $("input[name='is_promote']").click(function(){
+    var a=$("input[name='is_promote']:checked").val();
+    if(a==0){
+    
+    	$("#pro_list").hide();
+    	$("#pro_list1").hide();
+    }else{
+    	$("#pro_list").show();
+      $("#pro_list1").show();
+    }
+    
+});
+    	
  
 </script>

@@ -110,11 +110,7 @@ else{
 
 }
 
-public function del(){
-	
-	
-	
-}
+
 
 }
 ?>

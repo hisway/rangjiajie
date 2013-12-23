@@ -4,16 +4,16 @@ Class GoodsAction extends CommonAction{
 	public function index(){
 		import('ORG.Util.Page');
 		$goods=M('Goods');
-			$count      = $goods->count();// ²éÑ¯Âú×ãÒªÇóµÄ×Ü¼ÇÂ¼Êı
+			$count      = $goods->count();// æŸ¥è¯¢æ»¡è¶³è¦æ±‚çš„æ€»è®°å½•æ•°
 
-    $Page       = new Page($count,10);// ÊµÀı»¯·ÖÒ³Àà ´«Èë×Ü¼ÇÂ¼ÊıºÍÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
+    $Page       = new Page($count,10);// å®ä¾‹åŒ–åˆ†é¡µç±» ä¼ å…¥æ€»è®°å½•æ•°å’Œæ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
 
-    $show       = $Page->show();// ·ÖÒ³ÏÔÊ¾Êä³ö
+    $show       = $Page->show();// åˆ†é¡µæ˜¾ç¤ºè¾“å‡º
 
-// ½øĞĞ·ÖÒ³Êı¾İ²éÑ¯ ×¢Òâlimit·½·¨µÄ²ÎÊıÒªÊ¹ÓÃPageÀàµÄÊôĞÔ
+// è¿›è¡Œåˆ†é¡µæ•°æ®æŸ¥è¯¢ æ³¨æ„limitæ–¹æ³•çš„å‚æ•°è¦ä½¿ç”¨Pageç±»çš„å±æ€§
 
     $list = $goods->limit($Page->firstRow.','.$Page->listRows)->select();
-      $this->assign('page',$show);// ¸³Öµ·ÖÒ³Êä³ö
+      $this->assign('page',$show);// èµ‹å€¼åˆ†é¡µè¾“å‡º
 
       $this->assign('list',$list);
 	    $this->display();
@@ -25,20 +25,96 @@ Class GoodsAction extends CommonAction{
 		
 		$this->display();
 		
-	}
-	
-	
+	}	
 	public function add(){
+	if(empty($_FILES)){
 		
-$goods=D('Goods');
+		$this->error("è¯·é€‰æ‹©è¦ä¸Šä¼ çš„æ–‡ä»¶");
+	}else{
+	$file=$this->up();
+if ($this->c($file)){
+	
+$this->success('å†™å…¥æ•°æ®åº“æˆåŠŸ');	
+	
+}else{
+	
+echo $good->getLastsql();
 
 	
-		
+}
 	}
 	
+	
+	
+}
 
+private function up(){
+	import('ORG.Net.UploadFile');
+	$upload=new UploadFile();
+	$upload->maxSize="1000000";   //1M  é»˜è®¤ä¸º-1  æ— é™åˆ¶ä¸Šä¼ 
+	$upload->savePath='./Public/images/';//ä¸Šä¼ ä¿å­˜çš„è·¯å¾„ ä¸ä¸»å…¥å£æ–‡ä»¶å¹³çº§   
+  $upload->saveRule=time;//ä¸Šä¼ æ–‡ä»¶å ä¿å­˜è§„åˆ™
+  $upload->uoloadReplace=true;  //åŒåæ–‡ä»¶è¿›è¡Œè¦†ç›–
+  $upload->allowExts=array('jpg','jpeg','png','gif');
+  $upload->allowTypes=array('image/png','image/jpg','image/pjpeg','image/gif','image/jpeg');
+  $upload->autoSub=true;
+  $upload->subType=date;  
+  $upload->dateFormat='Y/M/D';
+  
+if($upload->upload()){
+$info =  $upload->getUploadFileInfo();   //è·å–ä¸Šä¼ çš„ä¿¡æ¯  
+return $info;
+}
+else{	
+	$this->error($upload->getErrorMsg());
 	
+}
+}
+
+
+private function c($file){
 	
+$good=M('Goods');
+$data['goods_img']	= $file[0]['savename'];
+$data['goods_name']	= $_POST['goods_name'];
+$data['goods_sn']	= $_POST['goods_sn'];
+$data['cat_id']	= $_POST['cat_id'];
+$data['brand_id']	= $_POST['brand_id'];
+$data['keyword_id']	= $_POST['kid'];
+$data['is_on_sale']	= $_POST['is_on_sale'];
+$data['is_best']	= $_POST['is_best'];
+$data['is_promote']	= $_POST['is_promote'];
+$data['market_price']	= $_POST['market_price'];
+$data['promote_price']	= $_POST['promote_price'];
+$data['promote_start_date']	= $_POST['promote_start_date'];
+$data['promote_end_date']	= $_POST['promote_end_date'];
+$data['goods_desc']	= $_POST['goods_desc'];
+$data['create_time']=date("Y-m-d H:i:s");	
+if ($good->data($data)->add())
+{
+	return true;
+	}else{
+		return false;
+	}
+	
+}
+
+
+
+public function edit(){
+	
+	$good=M("Goods");
+	
+	$id=$_GET['id'];
+	
+	$list=$good->where("id=$id")->find();
+	
+  $this->assign('list',$list);
+	
+  $this->display();
+	
+}
+
 	
 
 	
