@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" action="{:U(GROUP_NAME.'/Member/search')}" method="post">  
+    会员列表：
+    <input type="text" name="users_name" class="abc input-default" placeholder="请输入用户名" value="">&nbsp;&nbsp;  
+    <button type="submit" class="btn btn-primary">搜索</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10" >
+    <thead>
+    <tr>
+    	  <th>编号</th>
+        <th>名称</th>
+        <th>性别</th>
+        <th>生日</th>
+        <th>邮箱</th>
+        <th>QQ</th>
+        <th>手机号码</th>
+        <th>家庭电话</th>
+        <th>公司电话</th>
+        
+       
+    </tr>
+    </thead>
+        <volist name="user" id="user">
+	     <tr>
+	     	
+            <td>{$i}</td>
+            <td>{$user.username}</td>
+            <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
+            <td>{$user.birthday}</td>
+            <td>{$user.email}</td>
+            <td>{$user.qq}</td>
+            <td>{$user.mobile_phone}</td>
+            <td>{$user.home_phone}</td>
+            <td>{$user.office_phone}</td>
+            
+        </tr>
+      </volist>
+        </table>
+<div class="inline pull-right page">
+         10122 条记录 1/507 页  <a href='#'>下一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下5页</a> <a href='#' >最后一页</a>    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        
+		$('#addnew').click(function(){
+
+				window.location.href="add.html";
+		 });
+
+
+    });
+
+	function del(id)
+	{
+		
+		
+		if(confirm("确定要删除吗？"))
+		{
+		
+			var url = "index.html";
+			
+			window.location.href=url;		
+		
+		}
+	
+	
+	
+	
+	}
+</script>

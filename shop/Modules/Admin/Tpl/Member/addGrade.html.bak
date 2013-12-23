@@ -1,0 +1,35 @@
+<include file='Public:header'/>
+
+                <form action="{:U(GROUP_NAME.'/Member/addGrade')}" method='post'>
+                    <table class="table table-bordered table-hover definewidth m10">
+                        <tr>
+                            <td align='right'>等级名称</td>
+                            <td>
+                                <input type="text"  name='grade_name'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>积分下限</td>
+                            <td>
+                                <input type="text"  name='min_points'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='right'>积分上限</td>
+                            <td>
+                                <input type="text"  name='max_points'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align='center'>
+                                <input type="submit"  class="btn btn-primary" value='保存添加' />
+                                <a href="{:U(GROUP_NAME.'/Member/grade')}" class="btn btn-success"  />返回等级列表</a>
+                            </td>
+                         </tr>
+                    </table>
+                </form>
+
+<!-- 
+<button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+ -->
+<include file='Public:bottom'/>
