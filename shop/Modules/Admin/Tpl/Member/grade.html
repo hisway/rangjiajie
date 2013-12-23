@@ -43,10 +43,9 @@
     <thead>
     <tr>
     	  <th>编号</th>
-        <th>会员名称</th>
+        <th>等级名称</th>
         <th>积分下限</th>
         <th>积分上限</th>
-        <th>状态</th>
         
        
     </tr>

@@ -5,57 +5,57 @@
                         <tr>
                             <td align='right'>名称</td>
                             <td>
-                                <input type="text"  name='users_name'/>
+                                <input type="text"  name='username'/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>密码</td>
                             <td>
-                                <input type="password"  name='users_password'/>
+                                <input type="password"  name='password'/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>性别</td>
                             <td>
-                                <input type="radio"  name='users_sex' value = 1 /> 男
-                                <input type="radio"  name='users_sex' value = 0 /> 女
+                                <input type="radio"  name='sex' value = 1 /> 男
+                                <input type="radio"  name='sex' value = 0 /> 女
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>生日</td>
                             <td>
-                                <input type="text"  name='users_birthday'/>
+                                <input type="text"  name='birthday'/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>邮箱</td>
                             <td>
-                                <input type="text"  name='users_email'/>
+                                <input type="text"  name='email'/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>QQ</td>
                             <td>
-                                <input type="text"  name='users_qq'/>
+                                <input type="text"  name='qq'/>
                             </td>
                         </tr>
 
                          <tr>
                             <td align='right'>手机号码</td>
                             <td>
-                                <input type="text"  name='users_phone'/>
+                                <input type="text"  name='mobile_phone'/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>家庭电话</td>
                             <td>
-                                <input type="text"  name='users_homeNo'/>
+                                <input type="text"  name='home_phone'/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>公司电话</td>
                             <td>
-                                <input type="text"  name='users_officeNo'/>
+                                <input type="text"  name='office_phone'/>
                             </td>
                         </tr>
                         <tr>

@@ -97,7 +97,7 @@
                         <tr>
                             <td colspan="2" align='center'>
                                 <input type="submit"  class="btn btn-primary" value='保存添加' />
-                                <a href="<?php echo U(GROUP_NAME.'/Member/index');?>" class="btn btn-success"  />返回列表</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Member/index');?>" class="btn btn-success"  />返回会员列表</a>
                             </td>
                          </tr>
                     </table>

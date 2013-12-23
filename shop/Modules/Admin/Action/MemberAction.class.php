@@ -98,10 +98,10 @@ Class MemberAction extends Action{
       //$this->display('index');
   	}
   	
-  	public function setField(){
+  	public function setField(){//修改单个字段
   		$rank_points=$this->_post('rank_points');
   		$id=$this->_post('id');
-  		var_dump($_POST);
+  		//var_dump($_POST);
   		$user=M('user');
   		if($user->where('id=%d',$id)->setField('rank_points',$rank_points)>0){
   			$this->success('修改成功',U(GROUP_NAME.'/Member/index'));
@@ -109,6 +109,18 @@ Class MemberAction extends Action{
   			$this->error('修改失败');
   			}
   		//$this->display('index');
+  		}
+  		
+  	public function add_Grade(){
+  		$data=$_POST;
+  		//var_dump($data);
+  		
+  		if(M('grade')-> add($data)){
+  			$this->success('添加成功',U(GROUP_NAME.'/Member/grade'));
+	    }else{
+	    	$this->error('添加失败');
+	    }
+       //$this->display();
   		}
  }
 ?>
