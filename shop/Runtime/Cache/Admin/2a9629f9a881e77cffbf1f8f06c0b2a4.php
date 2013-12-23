@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
     <title></title>
@@ -33,12 +33,12 @@
     </style>
 </head>
 <body>
-<form class="form-inline definewidth m20" action="{:U(GROUP_NAME.'/Member/search')}" method="post">  
+<form class="form-inline definewidth m20" action="<?php echo U(GROUP_NAME.'/Member/search');?>" method="post">  
     会员列表：
     <input type="text" name="users_name" class="abc input-default" placeholder="请输入用户名" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">搜索</button>
 </form>
- <form action="{:U(GROUP_NAME.'/Member/setField')}" method="post">
+ <form action="<?php echo U(GROUP_NAME.'/Member/setField');?>" method="post">
 <table class="table table-bordered table-hover definewidth m10" >
     <thead>
     <tr>
@@ -56,27 +56,26 @@
        
     </tr>
     </thead>
-        <volist name="user" id="user">
-	     <tr>
+        <?php if(is_array($user)): $i = 0; $__LIST__ = $user;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$user): $mod = ($i % 2 );++$i;?><tr>
 	     	
-            <td>{$i}</td>
-            <td>{$user.username}</td>
-            <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
-            <td>{$user.birthday}</td>
-            <form action="{:U(GROUP_NAME.'/Member/setField')}" method="post"><td><input type="hidden" name="id" value="{$user.id}"/><input type="text" style="width:120px;" name="rank_points" value="{$user.rank_points}" /><button type="submit" class="btn btn-primary">修改</button></td></form>
-            <td>{$user.email}</td>
-            <td>{$user.qq}</td>
-            <td>{$user.mobile_phone}</td>
-            <td>{$user.home_phone}</td>
-            <td>{$user.office_phone}</td>
-            <td><a href="detail.html?id={$user.id}">编辑</a></td>
-            <td><a onclick="return del({$user.id})" href="{:U(GROUP_NAME.'/Member/delUser')}?id={$user.id}">删除</a></td>
-        </tr>
-      </volist>
+            <td><?php echo ($i); ?></td>
+            <td><?php echo ($user["username"]); ?></td>
+            <td><?php if($user["sex"] == 1 ): ?>男<?php else: ?>女<?php endif; ?></td>
+            <td><?php echo ($user["birthday"]); ?></td>
+            <form action="<?php echo U(GROUP_NAME.'/Member/setField');?>" method="post"><td><input type="hidden" name="id" value="<?php echo ($user["id"]); ?>"/><input type="text" style="width:120px;" name="rank_points" value="<?php echo ($user["rank_points"]); ?>" /><button type="submit" class="btn btn-primary">修改</button></td></form>
+            <td><?php echo ($user["email"]); ?></td>
+            <td><?php echo ($user["qq"]); ?></td>
+            <td><?php echo ($user["mobile_phone"]); ?></td>
+            <td><?php echo ($user["home_phone"]); ?></td>
+            <td><?php echo ($user["office_phone"]); ?></td>
+            <td><a href="detail.html?id=<?php echo ($user["id"]); ?>">编辑</a></td>
+            <td><a onclick="return del(<?php echo ($user["id"]); ?>)" href="<?php echo U(GROUP_NAME.'/Member/delUser');?>?id=<?php echo ($user["id"]); ?>">删除</a></td>
+        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </table>
         </form>
 <div class="inline pull-right page">
-         {$page}
+         <?php echo ($page); ?>
+</div>
 </body>
 </html>
 <script>

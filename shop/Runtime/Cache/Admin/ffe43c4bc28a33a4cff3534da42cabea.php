@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>后台管理系统</title>
@@ -15,7 +15,7 @@
        <!--<img src="/chinapost/Public/assets/img/top.png">-->
       </div>
 
-    <div class="dl-log">欢迎您，<span class="dl-log-user">{$username}</span><a href="{:U('Index/loginout')}" title="退出系统" class="dl-log-quit">[退出]</a>
+    <div class="dl-log">欢迎您，<span class="dl-log-user"><?php echo ($username); ?></span><a href="<?php echo U('Index/loginout');?>" title="退出系统" class="dl-log-quit">[退出]</a>
 
     </div>
   </div>
@@ -92,7 +92,7 @@
             {text:'会员等级管理',items:
               [
                 {id:'1',text:'会员等级',href:'__GROUP__/Member/grade.html'},
-                {id:'2',text:'添加等级',href:'__GROUP__/Member/addgrade.html'}
+                {id:'2',text:'添加等级',href:'__GROUP__/Member/addGrade.html'}
               ]
             },
             {text:'资金管理',items:

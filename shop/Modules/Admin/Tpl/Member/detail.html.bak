@@ -6,54 +6,54 @@
                         <tr>
                             <td align='right'>名称</td>
                             <td>
-                                <input type="text"  name='users_name' value="{$user.username}"/>
+                                <input type="text"  name='username' value="{$user.username}"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>性别</td>
                             <td>
-                                <input type="radio"  name='users_sex' value="{$user.sex}"
+                                <input type="radio"  name='sex' value="1"
                                 <eq name="user.sex" value="1">checked</eq> />男
-                                <input type="radio"  name='users_sex' value="{$user.sex}"
+                                <input type="radio"  name='sex' value="0"
                                 <eq name="user.sex" value="0">checked</eq> />女
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>生日</td>
                             <td>
-                                <input type="text"  name='users_birthday' value="{$user.birthday}"  /> 
+                                <input type="text"  name='birthday' value="{$user.birthday}"  /> 
                             </td>
                         </tr>
             
                         <tr>
                             <td align='right'>邮箱</td>
                             <td>
-                                <input type="text"  name='users_email' value="{$user.email}"/>
+                                <input type="text"  name='email' value="{$user.email}"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>QQ</td>
                             <td>
-                                <input type="text"  name='users_qq' value="{$user.qq}"/>
+                                <input type="text"  name='qq' value="{$user.qq}"/>
                             </td>
                         </tr>
 
                          <tr>
                             <td align='right'>手机号码</td>
                             <td>
-                                <input type="text"  name='users_phone' value="{$user.mobile_phone}"/>
+                                <input type="text"  name='mobile_phone' value="{$user.mobile_phone}"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>家庭电话</td>
                             <td>
-                                <input type="text"  name='users_homeNo' value="{$user.home_phone}"/>
+                                <input type="text"  name='home_phone' value="{$user.home_phone}"/>
                             </td>
                         </tr>
                         <tr>
                             <td align='right'>公司电话</td>
                             <td>
-                                <input type="text"  name='users_officeNo' value="{$user.office_phone}"/>
+                                <input type="text"  name='office_phone' value="{$user.office_phone}"/>
                             </td>
                         </tr>
                         <tr>

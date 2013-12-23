@@ -1,6 +1,42 @@
-<include file='Public:header'/>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/cate_de.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
 
-                <form action="{:U(GROUP_NAME.'/Member/addUser')}" method='post'>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+                <form action="<?php echo U(GROUP_NAME.'/Member/addUser');?>" method='post'>
                     <table class="table table-bordered table-hover definewidth m10">
                         <tr>
                             <td align='right'>名称</td>
@@ -61,7 +97,7 @@
                         <tr>
                             <td colspan="2" align='center'>
                                 <input type="submit"  class="btn btn-primary" value='保存添加' />
-                                <a href="{:U(GROUP_NAME.'/Member/index')}" class="btn btn-success"  />返回会员列表</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Member/index');?>" class="btn btn-success"  />返回会员列表</a>
                             </td>
                          </tr>
                     </table>
@@ -70,4 +106,39 @@
 <!-- 
 <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
  -->
-<include file='Public:bottom'/>
+</body>
+</html>
+<script>
+    $(function () {
+        
+		$('#addnew').click(function(){
+
+				window.location.href="add.html";
+		 });
+
+		$('#backid').click(function(){
+			
+				window.location.href="<?php echo U(MODULE_NAME.'/index');?>";
+		 });
+
+
+    });
+
+	function del(id)
+	{
+		
+		
+		if(confirm("确定要删除吗？"))
+		{
+		
+			var url = "index.html";
+			
+			window.location.href=url;		
+		
+		}
+	
+	
+	
+	
+	}
+</script>
