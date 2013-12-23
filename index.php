@@ -1,7 +1,14 @@
 <?php
-	define('APP_NAME', 'shop'); //项目名称
-	define('APP_PATH', './shop/'); //项目目录
-	define('APP_DEBUG', TRUE);
-	include './ThinkPHP/ThinkPHP.php'; //引入核心运行文件
+	// 检测PHP环境
+if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
+
+// 定义应用目录
+define('APP_PATH','./shop/');
+
+define('APP_DEBUG', TRUE);
+
+// 引入ThinkPHP入口文件
+require './ThinkPHP/ThinkPHP.php';
+
 
 ?>
