@@ -9,7 +9,7 @@ public function add(){
 	
 $brand=M('Brand');
 $data['brand_name']=$_POST['brand_name'];
-$data['cat_id']=$_POST['category'];
+$data['cat_id']=$_POST['cat_id'];
 $data['is_show']=$_POST['is_show']; 
 if($brand->add($data)){
 $this->success();	
@@ -29,6 +29,23 @@ public function getbrand(){
 	echo $list;
 
 }
+public function getBrandbyid(){
+	$id=$_GET['id'];
+	
+	$good=M('Goods');
+	
+	$ls=$good->where("id=$id")->find();
+	$id=$ls['brand_id'];
+
+	$brand=M('Brand');
+	$list=$brand->where("id=$id")->find(); 
+	
+	$list=json_encode($list);
+	echo $list;
+
+}
+
+
 
 
 
