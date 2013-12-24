@@ -11,6 +11,7 @@
     <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/cate_de.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/brand.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>    
@@ -114,7 +115,7 @@
    
     <tr>
         <td width="10%" class="tableleft">产品图片</td>
-        <td><img src="__ROOT__/Public/images/{$list.goods_img}"  maxwidth=80px></td>
+        <td><img src="__ROOT__/Uploads/{$list.goods_img}"  maxwidth=80px></td>
     </tr>
     
     
@@ -150,13 +151,23 @@
 				window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods";
 		 }); 
 		 
-		    
-  $.get("http://localhost/rangjiajie/index.php/Admin/Brand/getBrandbyid/",{id:$("#id").val()},function(data){
-  	
-	$("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
-	
+//当前品牌		    
+  $.get("http://localhost/rangjiajie/index.php/Admin/Brand/getBrandbyid/",{id:$("#id").val(),cat_id:$("#category").val()},function(data){
+
+   $.each(data, function(i,data){
+   	if(data.id==data.b_id){
+      $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
+      $("#get_brand ").val(data.id);    
+	}else{
+		  $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
+	}	
+});	
 },'json');
 
+
+
+
+change_brand();
 
 
     

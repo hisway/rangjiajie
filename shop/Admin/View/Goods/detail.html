@@ -12,6 +12,7 @@
     <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/cate_de.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/brand.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>    
@@ -145,60 +146,19 @@
 <script>
     $(function () {  
     	  	 
-    	 set_category('', 1, '');        
+    	 set_category('', 1, '');   
+    	 
+    	 UE.getEditor('myEditor',{
+        initialFrameWidth : 680,
+        initialFrameHeight: 200
+    });     
     
     $('#backid').click(function(){
 				window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods";
 		 });
 
     //品牌
-     $("#c1").change(function(){
-          $("#get_brand")[0].options.length=0;
-          $("#get_brand").prepend("<option value='0'>请选择品牌</option>");  
-        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c1").val(), function(data){
-          $.each(data, function(i,data){  
-          
-          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
-      });
-                      
-        });
-         return false;  
-    });
-    
-    $("#c2").change(function(){
-    	 $("#get_brand")[0].options.length=0;
-    	 	$("#get_brand").prepend("<option value='0'>请选择品牌</option>"); 
-        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c2").val(), function(data){
-          $.each(data, function(i,data){ 
-           
-          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
-      });
-                         
-        });
-         return false; 
-    });
-    $("#c3").change(function(){
-    	 $("#get_brand")[0].options.length=0;
-    	 	$("#get_brand").prepend("<option value='0'>请选择品牌</option>"); 
-        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c3").val(), function(data){
-          $.each(data, function(i,data){  
-          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
-      });
-                      
-        });
-         return false;  
-    });
-    $("#c4").change(function(){
-    	 $("#get_brand")[0].options.length=0;
-    	 	$("#get_brand").prepend("<option value='0'>请选择品牌</option>"); 
-        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Brand/getbrand?cat_id='+ $("#c4").val(), function(data){
-          $.each(data, function(i,data){  
-          $("#get_brand").append("<option value="+data.id+">"+data.brand_name+"</option>");
-      });
-                          
-        });
-        return false; 
-    });
+     change_brand();
      
     
  
@@ -275,10 +235,7 @@
 <script type="text/javascript">
    
   
-    UE.getEditor('myEditor',{
-        initialFrameWidth : 680,
-        initialFrameHeight: 200
-    });
+    
  
  
  //促销 

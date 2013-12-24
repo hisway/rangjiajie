@@ -5,9 +5,9 @@ Class GoodsController extends CommonController{
 		$goods=M('Goods');
 		$count = $goods->count();// 查询满足要求的总记录数
 
-	    $Page = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 
-	    $show = $Page->show();// 分页显示输出
+	  $show = $Page->show();// 分页显示输出
 
 // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 
@@ -25,22 +25,26 @@ Class GoodsController extends CommonController{
 		$this->display();
 		
 	}	
+	
 	public function add(){
-	if(empty($_FILES)){
+
+	  if(empty($_FILES)){
 		
 		$this->error("请选择要上传的文件");
-	}else{
-	$file=$this->up();
-if ($this->c($file)){
+		
+	  }else{
+	    $file=$this->up();
 	
-$this->success('写入数据库成功');	
+    if ($this->c($file)){
 	
-}else{
+      $this->success('写入数据库成功');	
 	
-echo $good->getLastsql();
+    }else{
+	    $good=M('Goods');
+      echo $good->getLastsql();
 
 	
-}
+    }
 	}
 	
 	
@@ -48,33 +52,38 @@ echo $good->getLastsql();
 }
 
 private function up(){
-	import('ORG.Net.UploadFile');
-	$upload=new UploadFile();
-	$upload->maxSize="1000000";   //1M  默认为-1  无限制上传
-	$upload->savePath='./Public/images/';//上传保存的路径 与主入口文件平级   
-  $upload->saveRule=time;//上传文件名 保存规则
-  $upload->uoloadReplace=true;  //同名文件进行覆盖
-  $upload->allowExts=array('jpg','jpeg','png','gif');
-  $upload->allowTypes=array('image/png','image/jpg','image/pjpeg','image/gif','image/jpeg');
-  $upload->autoSub=true;
-  $upload->subType=date;  
-  $upload->dateFormat='Y/M/D';
-  
-if($upload->upload()){
-$info =  $upload->getUploadFileInfo();   //获取上传的信息  
+	
+		
+		$config = array(
+	      'mimes'    => array(), //允许上传的文件MiMe类型
+        'maxSize'  => 0, //上传的文件大小限制 (0-不做限制)
+        'exts'     => array(), //允许上传的文件后缀
+        'autoSub'  => true, //自动子目录保存文件
+        'subName'  => array('date', 'Y/m/d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
+    	  'rootPath' => './Uploads/', //保存根路径
+        'savePath' => 'images/', //保存路径
+        'saveName' => array('uniqid', ''), //上传文件命名规则，[0]-函数名，[1]-参数，多个参数使用数组
+        'saveExt'  => '', //文件保存后缀，空则使用原后缀
+        'replace'  => false, //存在同名是否覆盖
+        'hash'     => true, //是否生成hash编码
+        'callback' => false, //检测文件是否存在回调，如果存在返回文件信息数组
+	);
+$upload= new \Think\Upload($config);
+$info=$upload->upload($_FILES);
+if($info){
 return $info;
 }
 else{	
-	$this->error($upload->getErrorMsg());
+	$this->error($upload->getError());
 	
 }
 }
 
 
 private function c($file){
-	
+
 $good=M('Goods');
-$data['goods_img']	= $file[0]['savename'];
+$data['goods_img']	= $file['goods_img']['savepath'].$file['goods_img']['savename'];
 $data['goods_name']	= $_POST['goods_name'];
 $data['goods_sn']	= $_POST['goods_sn'];
 $data['cat_id']	= $_POST['cat_id'];

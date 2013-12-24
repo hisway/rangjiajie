@@ -50,7 +50,7 @@ class Upload{
     	/* 获取配置 */
         $this->config = array_merge($this->config, $config);
         $driver     =   $driver? $driver : C('FILE_UPLOAD_TYPE');
-
+      
         /* 设置上传驱动 */
         if(!strpos($driver,'\\')){
             $class  =   'Think\\Upload\\Driver\\'.ucfirst(strtolower($driver));

@@ -2,7 +2,6 @@
 namespace Admin\Controller;
 Class CateController extends CommonController{
 	public function index(){
-		import('ORG.Util.Page');
 		$cate=M('Cate');
 		
 		$count      = $cate->count();// 查询满足要求的总记录数

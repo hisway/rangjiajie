@@ -96,7 +96,7 @@ $this->display();
 public function  modify(){
 	
 	$data['is_show']=$_POST['is_show'];
-	$id=$_POST['goods_id'];
+	$id=$_POST['id'];
 	$mess=M('Message');	
 	if($mess->where("id=$id")->save($data)){
  
