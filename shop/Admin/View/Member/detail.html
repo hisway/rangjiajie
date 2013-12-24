@@ -1,6 +1,6 @@
 <include file='Public:header'/>
 
-                <form action="{:U(GROUP_NAME.'/Member/save')}" method='post'>
+                <form action="{:U(MODULE_NAME.'/Member/save')}" method='post'>
                     <table class="table table-bordered table-hover definewidth m10">
                     	          <input type="hidden" name="id" value="{$user.id}"/>
                         <tr>
@@ -59,7 +59,7 @@
                         <tr>
                             <td colspan="2" align='center'>
                                 <input type="submit"  class="btn btn-primary" value='保存修改' />
-                                <a href="{:U(GROUP_NAME.'/Member/index')}" class="btn btn-success"  />返回列表</a>
+                                <a href="{:U(MODULE_NAME.'/Member/index')}" class="btn btn-success"  />返回列表</a>
                             </td>
                          </tr>
                     </table>

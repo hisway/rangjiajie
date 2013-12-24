@@ -1,19 +1,18 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class MessageController extends Controller {
+class MessageController extends CommonController {
 public function index(){
   import('ORG.Util.Page');
   
   $mess=M('Message');
   
-  $count      = $mess->count();// ²éÑ¯Âú×ãÒªÇóµÄ×Ü¼ÇÂ¼Êý
+  $count      = $mess->count();// 
 
-  $Page       = new Page($count,10);// ÊµÀý»¯·ÖÒ³Àà ´«Èë×Ü¼ÇÂ¼ÊýºÍÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êý
+  $Page       = new \Think\Page($count,10);// 
 
-  $show       = $Page->show();// ·ÖÒ³ÏÔÊ¾Êä³ö
+  $show       = $Page->show();// 
 
-// ½øÐÐ·ÖÒ³Êý¾Ý²éÑ¯ ×¢Òâlimit·½·¨µÄ²ÎÊýÒªÊ¹ÓÃPageÀàµÄÊôÐÔ
+// 
 
 
 
@@ -23,7 +22,7 @@ public function index(){
   
   
   /*   
-  //1ÖÖ·½·¨
+  //
   
   foreach ($list as $l=> $v){
   	
@@ -35,7 +34,7 @@ public function index(){
   } 
   
 */
- //  2ÖÖ·½·¨
+ // 
 
   $lists=array();
   foreach ($list as $l){
@@ -55,7 +54,7 @@ public function index(){
   	
   }
   
-  $this->assign('page',$show);// ¸³Öµ·ÖÒ³Êä³ö
+  $this->assign('page',$show);// 
 
   $this->assign('list',$lists);
 	

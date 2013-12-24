@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-Class MenuController extends Controller{
+Class MenuController extends CommonController{
 	public function index(){
 	    $this->display();
 	}

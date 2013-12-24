@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-Class CategoryController extends Controller{
+Class CategoryController extends CommonController{
 public function index(){
 $cate=M('Category');
 $list=$cate->field("cat_id,cat_name,parent_id,unit,concat(unit,'-',cat_id)as newpath")->order('newpath')->select();

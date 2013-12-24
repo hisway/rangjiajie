@@ -1,13 +1,12 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class Off_saleController extends Controller {
+class OffsaleController extends CommonController {
 public function index(){
 		import('ORG.Util.Page');
 		$goods=M('Goods');
 	  $count      = $goods->where('is_on_sale = 0')->count();// 查询满足要求的总记录数
 
-    $Page       = new Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
+    $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 
     $show       = $Page->show();// 分页显示输出
 

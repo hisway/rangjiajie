@@ -1,8 +1,7 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
 //订单管理
-Class OrderController extends Controller{
+Class OrderController extends CommonController{
 	public function index(){
 		
 		$order=M('order');

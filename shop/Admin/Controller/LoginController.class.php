@@ -8,6 +8,8 @@ Class LoginController extends Controller{
 
 	public function login(){
 		if (!$_POST) halt('页面不存在');
+		$verify = new \Think\Verify;
+ 	    if(!$verify->check(I('code')))$this->error('验证码错误');
 		//if(I('code','','md5') !=session('verify')) $this->error('验证码错误');
 		$username = I('username');
  		$pwd = I('password');
@@ -28,12 +30,15 @@ Class LoginController extends Controller{
 	 	session('username',$user['username']);
 	 	session('time',date('y-m-d H:i',$user['last_login']));
 	 	session('loginip',$user['last_ip']);
-	 	redirect(__GROUP__);
+	 	redirect(__MODULE__);
 	}
 
 	public function verify(){
  	    //import('ORG.Util.Image');
  	    //Image::buildImageVerify(4,1,'png');
+ 	    $verify = new \Think\Verify;
+ 	    $verify->entry();
+
  	}
 
  	public function checkusername(){
@@ -44,8 +49,9 @@ Class LoginController extends Controller{
  	}
 
  	public function checkcode(){
- 		$code = I('code','','md5');
- 		if ($code==session('verify')) {
+ 		$code = I('code');
+ 		$verify = new \Think\Verify;
+ 		if ($verify->check(I('code'))) {
  			echo 1;//正常
  		}
  	}

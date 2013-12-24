@@ -1,15 +1,13 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-import("ORG.Util.Page");// 导入分页类
-Class MemberController extends Controller{
+Class MemberController extends CommonController{
 	
 	    
 	public function index(){
 		  
 		  $user =M('user');
 		  $count= $user->count();// 查询满足要求的总记录数
-		  $Page = new Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
+		  $Page = new \Think\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
 		  $list = $user->limit($Page->firstRow.','.$Page->listRows)->select();
 			$show = $Page->show();// 分页显示输出
 			$this->assign('page',$show);// 赋值分页输出

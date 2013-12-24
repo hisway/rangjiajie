@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-Class NodeController extends Controller{
+Class NodeController extends CommonController{
 	public function index(){
 		$rule = M('auth_rule')->select();
 		foreach ($rule as $key => $v) {

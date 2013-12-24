@@ -1,5 +1,5 @@
 <include file='Public:header'/>
-{:U(GROUP_NAME)}
+{:U(MODULE_NAME)}
 <BR>
 __GROUP__
 <form class="form-inline definewidth m20" action="index.html" method="get">  
@@ -8,7 +8,7 @@ __GROUP__
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增节点</button>
 </form>
 
-            <form action="{:U(GROUP_NAME.'/Node/sortAuth')}" method='post'>
+            <form action="{:U(MODULE_NAME.'/Node/sortAuth')}" method='post'>
                 <table class="table table-bordered table-hover definewidth m10">
                     <thead>
                         <tr>
@@ -33,9 +33,9 @@ __GROUP__
                             </td>
                             <td><if condition='$v.status eq 1'>启用<else />禁用</if></td>
                             <td>
-                                <a href="{:U(GROUP_NAME.'/Node/addAuth',array('id'=>$v['id']))}"><i class="icon-plus"></i></a>
-                                <a href="{:U(GROUP_NAME.'/Node/edit',array('id'=>$v['id']))}"><i class="icon-pencil"></i></a>
-                                <a href="{:U(GROUP_NAME.'/Node/del',array('id'=>$v['id']))}"><i class="icon-remove"></i></a>
+                                <a href="{:U(MODULE_NAME.'/Node/addAuth',array('id'=>$v['id']))}"><i class="icon-plus"></i></a>
+                                <a href="{:U(MODULE_NAME.'/Node/edit',array('id'=>$v['id']))}"><i class="icon-pencil"></i></a>
+                                <a href="{:U(MODULE_NAME.'/Node/del',array('id'=>$v['id']))}"><i class="icon-remove"></i></a>
                             </td>
                         </tr>
                     </foreach>

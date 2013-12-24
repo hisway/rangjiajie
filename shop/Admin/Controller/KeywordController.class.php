@@ -1,7 +1,6 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class KeywordController extends Controller {
+class KeywordController extends CommonController {
 public function  index(){
 
 $this->display();

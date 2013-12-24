@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-Class UserController extends Controller{
+Class UserController extends CommonController{
 	public function index(){
 		$user = M('admin')->select();
 		$db = M('auth_group_access');

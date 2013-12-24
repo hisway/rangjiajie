@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-Class RoleController extends Controller{
+Class RoleController extends CommonController{
 	//角色管理
 	public function index(){
 		$this->role = M('auth_group')->select();

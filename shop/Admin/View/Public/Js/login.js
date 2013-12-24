@@ -5,7 +5,7 @@ function change_code(obj){
 //登录验证  1为空   2为错误
 var validate={username:1,password:1,code:1}
 $(function(){
-	$("form").submit(function(){
+	$("formS").submit(function(){
 		if(validate.username==0 && validate.password==0 && validate.code==0){
 			return true;
 		}

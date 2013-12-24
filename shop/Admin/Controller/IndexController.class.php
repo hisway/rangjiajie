@@ -1,7 +1,6 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-Class IndexController extends Controller{
+Class IndexController extends CommonController{
 	public function index(){
 	    $this->display();
 	}
