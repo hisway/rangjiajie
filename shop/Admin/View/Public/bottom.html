@@ -5,12 +5,12 @@
         
 		$('#addnew').click(function(){
 
-				window.location.href="add.html";
+				window.location.href="{:U(CONTROLLER_NAME.'/add')}";
 		 });
 
 		$('#backid').click(function(){
 			
-				window.location.href="{:U(MODULE_NAME.'/index')}";
+				window.location.href="{:U(CONTROLLER_NAME.'/index')}";
 		 });
 
 
@@ -23,7 +23,7 @@
 		if(confirm("确定要删除吗？"))
 		{
 		
-			var url = "index.html";
+			var url = "{:U(CONTROLLER_NAME.'/index')}";
 			
 			window.location.href=url;		
 		

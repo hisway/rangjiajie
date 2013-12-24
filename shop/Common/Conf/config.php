@@ -1,10 +1,18 @@
 <?php
 return array(
-/*	'APP_GROUP_LIST'=>'Index,Admin,Member',//开启分组
-	'DEFAULT_GROUP'=>'Index',//默认分组
-	'APP_GROUP_MODE'=>1,
-	'APP_GROUP_PATH'=>'Modules',   */
+    /* 模块相关配置 */
+    'DEFAULT_MODULE'     => 'Home',
+    'MODULE_DENY_LIST'   => array('Common'),
+    //'MODULE_ALLOW_LIST'  => array('Home','Admin'),
 
+    /* URL配置 */
+    'URL_CASE_INSENSITIVE' => true, //默认false 表示URL区分大小写 true则表示不区分大小写
+    'URL_MODEL'            => 3, //URL模式
+    'VAR_URL_PARAMS'       => '', // PATHINFO URL参数变量
+    'URL_PATHINFO_DEPR'    => '/', //PATHINFO URL分割符
+    //'URL_HTML_SUFFIX'=>'html', //URL后缀名
+
+    /* 数据库配置 */
     'DB_TYPE'   => 'mysql',
     'DB_HOST'=>'localhost',
     'DB_NAME'=>'rangjiajie',
@@ -12,21 +20,16 @@ return array(
     'DB_PWD'=>'comrangjiajie',
     'DB_PREFIX'=> 'ws_',
     
-	//'URL_MODEL'=>1,
-	
-	//'URL_HTML_SUFFIX'=>'html', //URL后缀名
-/*	'DEFALULT_FITER'=>'htmlspecialchars',
-	'TMPL_VAR_IDENIFY'=>'array', //点语法，指定数组，提高编译速度($v.arr/$v->a) 
-	'TMPL_FILE_DEPR'=>'/',*/
+ 	/* 全局过滤配置 */
+    'DEFAULT_FILTER' => 'htmlspecialchars', //全局过滤函数
     
-    //'SESSION_TYPE'=>'Db',
-    //'LOAD_EXT_CONFIG'=>'',	//加载配置文件
-
+    /* 调试配置 */
     'SHOW_PAGE_TRACE' => TRUE,
-    //'URL_MODEL'=>3,
-    //'URL_ROUTER_ON'=>TRUE,
     
     'DB_FIELDS_CACHE'=>false,
+
+    //'SESSION_TYPE'=>'Db',
+    //'LOAD_EXT_CONFIG'=>'',    //加载配置文件
 
 
 
