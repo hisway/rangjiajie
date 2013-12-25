@@ -49,14 +49,16 @@ return array(
 
 	//AUTH权限类配置
 	'AUTH_CONFIG'=>array(
-        'AUTH_ON' => 0, //认证开关
+        'AUTH_ON' => 1, //认证开关
         'AUTH_TYPE' => 1, // 认证方式，1为时时认证；2为登录认证。
         'AUTH_GROUP' => 'ws_auth_group', //用户组数据表名
         'AUTH_GROUP_ACCESS' => 'ws_auth_group_access', //用户组明细表
         'AUTH_RULE' => 'ws_auth_rule', //权限规则表
-        'AUTH_USER' => 'ws_admin'//用户信息表
+        'AUTH_USER' => 'ws_admin',//用户信息表
+
+        'SuperAdmin' => '1',    //不做认证的用户ID
+        'NOT_AUTH_ACTION' => 'Index-index,Index-loginout' //不需要验证的方法
     ),
-    
     
 
 

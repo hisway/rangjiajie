@@ -10,7 +10,7 @@ Class CommonController extends Controller{
 
 
         $auth=new \Think\Auth();
-        if(!$auth->check(CONTROLLER_NAME.'-'.ACTION_NAME,session('uid'))){
+        if( !$auth->check(CONTROLLER_NAME.'-'.ACTION_NAME,session('uid')) && !in_array(session('uid'), explode(',', C('AUTH_CONFIG.SuperAdmin'))) && !in_array(CONTROLLER_NAME.'-'.ACTION_NAME, explode(',', C('AUTH_CONFIG.NOT_AUTH_ACTION'))) ){
             $this->error('您没有权限');
         }
 
