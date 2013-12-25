@@ -20,7 +20,7 @@ Class NodeController extends CommonController{
 		$data = $_POST;
 		$data['name'] = $data['model'].'-'.$data['action'];
 		if (M('auth_rule')->add($data)) {
-			$this->success('添加成功',U(GROUP_NAME.'/Node/index'));
+			$this->success('添加成功',U(MODULE_NAME.'/Node/index'));
 		}else{
 			$this->error('添加失败');
 		}	    
@@ -37,7 +37,7 @@ Class NodeController extends CommonController{
 		$data = $_POST;
 		$data['name'] = $data['model'].'-'.$data['action'];
 		if (M('auth_rule')->save($data)) {
-			$this->success('修改成功',U(GROUP_NAME.'/Node/index'));
+			$this->success('修改成功',U(MODULE_NAME.'/Node/index'));
 		}else{
 			$this->error('内容无修改');
 		}	    
@@ -45,7 +45,7 @@ Class NodeController extends CommonController{
 
 	public function del(){
 		if (M('auth_rule')->delete(I('id'))) {
-			$this->success('删除成功',U(GROUP_NAME.'/Node/index'));
+			$this->success('删除成功',U(MODULE_NAME.'/Node/index'));
 		}else{
 			$this->error('删除失败');
 		}	    

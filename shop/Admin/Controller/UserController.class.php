@@ -25,7 +25,7 @@ Class UserController extends CommonController{
 			foreach ($data['role'] as $key => $v) {
 				$db->add(array('uid'=>$id,'group_id'=>$v));
 			}			
-			$this->success('添加成功',U(GROUP_NAME.'/User/index'));
+			$this->success('添加成功',U(MODULE_NAME.'/User/index'));
 		}else{
 			$this->error('添加失败');
 		}	    
@@ -34,7 +34,7 @@ Class UserController extends CommonController{
 	public function edit(){
 		$id = I('id');
 		$user = M('admin')->find($id);
-		$auth = new Auth();
+		$auth = new \Think\Auth();
 		$role = $auth->getGroups($id); //前台需更改
 		$this->user = $user;
 		$this->role = $role;
@@ -54,7 +54,7 @@ Class UserController extends CommonController{
 			}
 		}
 		if ($a||$b||$c) { //原来有权限未做更改，也提示已更新
-			$this->success('信息已更新',U(GROUP_NAME.'/User/index'));
+			$this->success('信息已更新',U(MODULE_NAME.'/User/index'));
 		}else{
 			$this->error('信息无修改');
 		}	    

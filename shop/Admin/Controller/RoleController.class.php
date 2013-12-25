@@ -16,7 +16,7 @@ Class RoleController extends CommonController{
 		$data = $_POST;
 		$data['rules'] = implode(',',$data['rules']);
 		if (M('auth_group')->add($data)) {
-			$this->success('添加成功',U(GROUP_NAME.'/Role/index'));
+			$this->success('添加成功',U(MODULE_NAME.'/Role/index'));
 		}else{
 			$this->error('添加失败');
 		}	    
@@ -34,7 +34,7 @@ Class RoleController extends CommonController{
 		$data = $_POST;
 		$data['rules'] = implode(',',$data['rules']);
 		if (M('auth_group')->save($data)) {
-			$this->success('修改成功',U(GROUP_NAME.'/Role/index'));
+			$this->success('修改成功',U(MODULE_NAME.'/Role/index'));
 		}else{
 			$this->error('内容无修改');
 		}	    
