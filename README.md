@@ -35,6 +35,7 @@ deploy root
                         |Library    |Think          //核心Think类库包目录
                                     |Behavior       //行为类库包目录
                                     |Org            //Org类库包目录
+                                        |Ws         //自己加的类库目录
                                     |Vender         //第三方类库包目录
                         |Extend                     //框架扩展目录
                         |Tpl                        //系统模版目录
