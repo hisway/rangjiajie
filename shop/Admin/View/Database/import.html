@@ -1,15 +1,7 @@
-<extend name="Public/base"/>
-
-<block name="body">
-    <!-- 标题栏 -->
-    <div class="main-title">
-        <h2>数据备份</h2>
-    </div>
-    <!-- /标题栏 -->
+<include file='Public:header'/>
 
     <!-- 应用列表 -->
-    <div class="data-table table-striped">
-        <table>
+        <table class="table table-bordered table-hover definewidth m10">
             <thead>
                 <tr>
                     <th width="200">备份名称</th>
@@ -38,9 +30,7 @@
                 </volist>
             </tbody>
         </table>
-    </div>
     <!-- /应用列表 -->
-</block>
 
 <block name="script">
     <script type="text/javascript">

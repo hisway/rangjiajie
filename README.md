@@ -29,6 +29,8 @@ deploy root
 
             |Uploads                                //文件上传目录
 
+            |Data   |backup                         //数据库备份目录
+
             |ThinkPHP   |Conf                       //核心配置目录
                         |Common                     //核心公共函数目录
                         |Lang                       //核心语言包目录
