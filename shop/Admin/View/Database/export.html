@@ -1,8 +1,14 @@
 <include file='Public:header'/>
+    <div id="main-content">
+        <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+            <button class="close fixed" style="margin-top: 4px;">&times;</button>
+            <div class="alert-content">这是内容</div>
+        </div>
+    </div>
 <form class="form-inline definewidth m20" action="" method="get">  
     <button type="button" class="btn btn-success" id="export" href="javascript:;" autocomplete="off">立即备份</button>
-    <button type="button" class="btn btn-success" id="optimize" href="{:U('optimize')}">优化表</button>
-    <button type="button" class="btn btn-success" id="repair" href="{:U('repair')}">修复表</button>
+    <button type="button" class="btn btn-success" id="optimize" href="{:U(MODULE_NAME.'/Database/optimize')}">优化表</button>
+    <button type="button" class="btn btn-success" id="repair" href="{:U(MODULE_NAME.'/Database/repair')}">修复表</button>
 </form>
 
     <!-- 应用列表 -->
@@ -42,12 +48,40 @@
     <!-- /应用列表 -->
 
     <script type="text/javascript">
+
+    /**顶部警告栏*/
+    var top_alert = $('#top-alert');
+    top_alert.find('.close').on('click', function () {
+        top_alert.removeClass('block').slideUp(200);
+    });
+    window.updateAlert = function (text,c) {
+        text = text||'default';
+        c = c||false;
+        if ( text!='default' ) {
+            top_alert.find('.alert-content').text(text);
+            if (top_alert.hasClass('block')) {
+            } else {
+                top_alert.addClass('block').slideDown(200);
+            }
+        } else {
+            if (top_alert.hasClass('block')) {
+                top_alert.removeClass('block').slideUp(200);
+            }
+        }
+        if ( c!=false ) {
+            top_alert.removeClass('alert-error alert-warn alert-info alert-success').addClass(c);
+        }
+    };
+
     (function($){
         var $form = $("#export-form"), $export = $("#export"), tables
             $optimize = $("#optimize"), $repair = $("#repair");
 
         $optimize.add($repair).click(function(){
+            //this.href = "{:U(MODULE_NAME.'/Database/repair')}";
+            alert(this);
             $.post(this.href, $form.serialize(), function(data){
+
                 if(data.status){
                     updateAlert(data.info,'alert-success');
                 } else {
