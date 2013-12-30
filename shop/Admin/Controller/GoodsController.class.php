@@ -21,13 +21,13 @@ Class GoodsController extends CommonController{
 	
 	public function detail(){
 		
-		
 		$this->display();
 		
 	}	
 	
 	public function add(){
 
+   
 	  if(empty($_FILES)){
 		
 		$this->error("请选择要上传的文件");
@@ -42,7 +42,6 @@ Class GoodsController extends CommonController{
     }else{
 	    $good=M('Goods');
       echo $good->getLastsql();
-
 	
     }
 	}
@@ -68,58 +67,91 @@ private function up(){
         'hash'     => true, //是否生成hash编码
         'callback' => false, //检测文件是否存在回调，如果存在返回文件信息数组
 	);
-$upload= new \Think\Upload($config);
-$info=$upload->upload($_FILES);
-if($info){
-return $info;
-}
-else{	
-	$this->error($upload->getError());
+		$upload= new \Think\Upload($config);
+		$info=$upload->upload($_FILES);
+		if($info){
+			return $info;
+		}
+		else{	
+			$this->error($upload->getError());
 	
-}
-}
-
-
-private function c($file){
-
-$good=M('Goods');
-$data['goods_img']	= $file['goods_img']['savepath'].$file['goods_img']['savename'];
-$data['goods_name']	= $_POST['goods_name'];
-$data['goods_sn']	= $_POST['goods_sn'];
-$data['cat_id']	= $_POST['cat_id'];
-$data['brand_id']	= $_POST['brand_id'];
-$data['keyword_id']	= $_POST['kid'];
-$data['is_on_sale']	= $_POST['is_on_sale'];
-$data['is_best']	= $_POST['is_best'];
-$data['is_promote']	= $_POST['is_promote'];
-$data['market_price']	= $_POST['market_price'];
-$data['promote_price']	= $_POST['promote_price'];
-$data['promote_start_date']	= $_POST['promote_start_date'];
-$data['promote_end_date']	= $_POST['promote_end_date'];
-$data['goods_desc']	= $_POST['goods_desc'];
-$data['create_time']=date("Y-m-d H:i:s");	
-if ($good->data($data)->add())
-{
-	return true;
-	}else{
-		return false;
+		}
 	}
+
+
+	private function c($file){
 	
-}
+		$kid=$_POST['kid'];
+		$kid=implode(",",$kid);
+		$good=M('Goods');
+		$data['goods_img']	= $file['goods_img']['savepath'].$file['goods_img']['savename'];
+		$data['goods_name']	= $_POST['goods_name'];
+		$data['goods_sn']	= $_POST['goods_sn'];
+		$data['cat_id']	= $_POST['cat_id'];
+		$data['brand_id']	= $_POST['brand_id'];
+		$data['keyword_id']	= $kid;
+		$data['is_on_sale']	= $_POST['is_on_sale'];
+		$data['is_best']	= $_POST['is_best'];
+		$data['is_promote']	= $_POST['is_promote'];
+		$data['market_price']	= $_POST['market_price'];
+		$data['promote_price']	= $_POST['promote_price'];
+		$data['promote_start_date']	= $_POST['promote_start_date'];
+		$data['promote_end_date']	= $_POST['promote_end_date'];
+		$data['goods_desc']	= $_POST['goods_desc'];
+		$data['create_time']=date("Y-m-d H:i:s");	
+		if ($good->data($data)->add())
+		{
+			return true;
+		}else{
+			return false;
+		}
+	
+	}
 
 
 
 public function edit(){
-	
-	$good=M("Goods");
-	
-	$id=$_GET['id'];
-	
-	$list=$good->where("id=$id")->find();
-	
-  $this->assign('list',$list);
-	
+  $good=M("Goods");	
+	$id=$_GET['id'];	
+	$list=$good->where("id=$id")->find();	
+  $this->assign('list',$list);	
   $this->display();
+}
+
+
+
+	public  function modify(){
+	
+		$id=$_POST['id'];
+		
+	  $kid=$_POST['kid'];
+		$kid=implode(",",$kid);
+	
+	  $good=M('Goods');
+		$data['goods_name']	= $_POST['goods_name'];
+		$data['goods_sn']	= $_POST['goods_sn'];
+		$data['cat_id']	= $_POST['cat_id'];
+		$data['brand_id']	= $_POST['brand_id'];
+		$data['keyword_id']	= $kid;
+		$data['is_on_sale']	= $_POST['is_on_sale'];
+		$data['is_best']	= $_POST['is_best'];
+		$data['is_promote']	= $_POST['is_promote'];
+		$data['market_price']	= $_POST['market_price'];
+		$data['promote_price']	= $_POST['promote_price'];
+		$data['promote_start_date']	= $_POST['promote_start_date'];
+		$data['promote_end_date']	= $_POST['promote_end_date'];
+		$data['goods_desc']	= $_POST['goods_desc'];	
+	
+		$rs=  $good->where("id= $id")->data($data)->save();
+		if($rs){
+		
+		  	$this->success();
+			
+			}else{
+		
+		    echo $good->getLastsql();
+		
+			}
 	
 }
 

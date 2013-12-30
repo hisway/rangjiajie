@@ -67,7 +67,7 @@
        <tr>
                             <td class="tableleft">拥有属性</td>
                             <td>
-                            <select id="get_Key" name="kid">
+                            <select id="get_Key" name="kid[]" multiple="multiple" size=15>
                                	
 		               
 		                        </select>
@@ -100,7 +100,7 @@
    
     <tr>
         <td width="10%" class="tableleft">市场价</td>
-        <td><input type="text" name="market_price"/></td>
+        <td><input type="text" name="market_price" /></td>
     </tr>
   
     <tr id="pro_list">
@@ -130,7 +130,7 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            <button type="submit" id="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
 </table>
@@ -153,9 +153,7 @@
         initialFrameHeight: 200
     });     
     
-    $('#backid').click(function(){
-				window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods";
-		 });
+   
 
     //品牌
      change_brand();
@@ -225,7 +223,20 @@
         return false; 
     });
      
-    
+   
+  
+   $('#backid').click(function(){
+		 window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods";
+		
+	
+     
+    });
+  
+   
+   
+   
+   
+   
     }); 
     
   
@@ -233,16 +244,11 @@
 </script>
 
 <script type="text/javascript">
-   
-  
-    
- 
  
  //促销 
      $("input[name='is_promote']").click(function(){
     var a=$("input[name='is_promote']:checked").val();
     if(a==0){
-    
     	$("#pro_list").hide();
     	$("#pro_list1").hide();
     }else{

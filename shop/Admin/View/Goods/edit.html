@@ -35,6 +35,7 @@
 
     </style>
 </head>
+<body>
 <form action="__URL__/modify" method="post" enctype="multipart/form-data">
 <table class="table table-bordered table-hover definewidth m10">
     <tr>
@@ -66,7 +67,7 @@
        <tr>
                             <td class="tableleft">拥有属性</td>
                             <td>
-                            <select id="get_Key" name="kid">
+                            <select id="get_Key" name="kid[]" multiple="multiple" size=15>
                                	
 		               
 		                        </select>
@@ -81,19 +82,41 @@
         <td class="tableleft">状态</td>
         <td>
             上架：&nbsp;
+            
+            <if condition="$list.is_on_sale eq 1 ">
+            
             <input type="radio" name="is_on_sale" value="1" checked/> 是
             &nbsp;
             <input type="radio" name="is_on_sale" value="0"/> 否
+             <else/> 
+             <input type="radio" name="is_on_sale" value="1" /> 是
+            &nbsp;
+            <input type="radio" name="is_on_sale" value="0" checked/> 否
+
+           </if>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             推荐：&nbsp;
+            <if condition="$list.is_best eq 1 ">
             <input type="radio" name="is_best" value="1" checked/> 是
             &nbsp;
             <input type="radio" name="is_best" value="0"/> 否
+            <else/> 
+            <input type="radio" name="is_best" value="1" /> 是
+            &nbsp;
+            <input type="radio" name="is_best" value="0" checked/> 否	
+            </if>
+            	
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             促销：&nbsp;
+            <if condition="$list.is_promote eq 1 ">
             <input type="radio" name="is_promote" value="1" checked/> 是
             &nbsp;
             <input type="radio" name="is_promote" value="0"/> 否
+            <else/> 
+            <input type="radio" name="is_promote" value="1" /> 是
+            &nbsp;
+            <input type="radio" name="is_promote" value="0" checked/> 否
+            </if>  
         </td>
     </tr>
    
@@ -101,7 +124,8 @@
         <td width="10%" class="tableleft">市场价</td>
         <td><input type="text" name="market_price" value="{$list.market_price}"/></td>
     </tr>
-  
+    
+    <if condition="$list.is_promote eq 1 ">
     <tr id="pro_list">
         <td width="10%" class="tableleft">促销价</td>
         <td><input type="text" name="promote_price" value="{$list.promote_price}"/></td>
@@ -111,7 +135,8 @@
         <td width="10%" class="tableleft">促销时间</td>
         <td><input type="text" name="promote_start_date" value="{$list.promote_start_date}"/> - <input type="text" name="promote_end_date" value="{$list.promote_end_date}"/></td>
     </tr>
-   
+ 
+   </if>
    
     <tr>
         <td width="10%" class="tableleft">产品图片</td>
@@ -129,7 +154,7 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-        	<input type="hidden"  id="id" value="{$list.id}">
+        	<input type="hidden"  id="id" name="id" value="{$list.id}">
           <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
@@ -168,9 +193,103 @@
 
 
 change_brand();
-
-
+//当前属性
+$.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#id").val(),cat_id:$("#category").val()},function(data){
+   $.each(data, function(i,data){  
+   	
+ 		var  item=new Array();
     
+    item=data.kid.split(","); 
+    
+   	if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");        
+        }
+        else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");  
+        }
+      for(j=0;j<item.length;j++){
+           	
+              if(data.id==item[j]){
+              	              
+              $("#get_Key option[value="+data.id+"]").attr("selected",true); 	
+      
+           
+              
+              
+             
+              }
+           } 
+              
+   
+});	
+    
+  
+        
+},'json');
+
+
+//关键字属性
+    $("#c1").change(function(){
+          $("#get_Key")[0].options.length=0;
+           	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c1").val(), function(data){
+          $.each(data, function(i,data){  
+         if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                      
+        });
+         return false;  
+    });   
+    $("#c2").change(function(){
+    	 $("#get_Key")[0].options.length=0;
+    	  	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c2").val(), function(data){
+          $.each(data, function(i,data){  
+          if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                         
+        });
+         return false; 
+    });
+    $("#c3").change(function(){
+    	 $("#get_Key")[0].options.length=0;
+    	  	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c3").val(), function(data){
+          $.each(data, function(i,data){
+          	if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                      
+        });
+         return false;  
+    });
+    $("#c4").change(function(){
+    	 $("#get_Key")[0].options.length=0;
+    	  	$("#get_Key").prepend("<option value='0'>顶级属性</option>"); 
+        $.getJSON('http://localhost/rangjiajie/index.php/Admin/Keyword/getKeyword?cat_id='+ $("#c4").val(), function(data){
+          $.each(data, function(i,data){  
+          if(data.count==2){  
+          $("#get_Key").append("<option value="+data.id+">"+data.name+"</option>");
+        }else{
+        	$("#get_Key").append("<option value="+data.id+">"+"&nbsp;"+"&nbsp;"+"&nbsp;"+data.name+"</option>");
+        }
+      });
+                          
+        });
+        return false; 
+    });
+     
     }); 
     
  
@@ -182,4 +301,18 @@ change_brand();
         initialFrameWidth : 680,
         initialFrameHeight: 200
     }); 
+    
+     //促销 
+     $("input[name='is_promote']").click(function(){
+    var a=$("input[name='is_promote']:checked").val();
+    if(a==0){
+      $("#pro_list").hide();
+    	$("#pro_list1").hide();
+    	
+    }else{
+    	$("#pro_list").show();
+      $("#pro_list1").show();
+    }
+    
+});
 </script>
