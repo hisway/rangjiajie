@@ -42,7 +42,6 @@ Class GoodsController extends CommonController{
     }else{
 	    $good=M('Goods');
       echo $good->getLastsql();
-	
     }
 	}
 	
