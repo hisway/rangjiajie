@@ -3,9 +3,9 @@ namespace Admin\Controller;
 class RecommendController extends CommonController {
 public function index(){
 		$goods=M('Goods');
-			$count = $goods->where('is_best = 1 and is_on_sale= 1')->count();// 查询满足要求的总记录数
+		$count = $goods->where('is_best = 1 and is_on_sale= 1')->count();// 查询满足要求的总记录数
 
-    $Page = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
+    $Page = new \Org\Mrc\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
 
     $show = $Page->show();// 分页显示输出
 
@@ -42,6 +42,20 @@ $list=$good->where("id=$id")->save($data);
 echo  date("Y-m-d H:i:s");
 
 }
+
+	public function search(){
+
+
+		$terms=$_GET['terms'];
+	  $goods=M('Goods');
+		$count = $goods->where("goods_name like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
+	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $show = $Page->show();// 分页显示输出
+    $list = $goods->limit($Page->firstRow.','.$Page->listRows)->where("goods_name like"." "."'%".$terms."%'")->select();
+    $this->assign('page',$show);// 赋值分页输出
+    $this->assign('list',$list);
+	  $this->display(index);
+	}
 
 
 

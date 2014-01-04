@@ -8,7 +8,7 @@ public function index(){
   
   $count      = $mess->count();// 
 
-  $Page       = new \Think\Page($count,10);// 
+    $Page = new \Org\Mrc\Page($count,10);// 
 
   $show       = $Page->show();// 
 
@@ -96,7 +96,7 @@ $this->display();
 public function  modify(){
 	
 	$data['is_show']=$_POST['is_show'];
-	$id=$_POST['goods_id'];
+	$id=$_POST['id'];
 	$mess=M('Message');	
 	if($mess->where("id=$id")->save($data)){
  
@@ -110,6 +110,38 @@ else{
 }
 
 }
+
+ public function search(){
+
+
+		$terms=$_GET['terms'];
+	  $mess=M('Message');
+		$count = $mess->where("content like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
+	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $show = $Page->show();// 分页显示输出
+    $list = $mess->limit($Page->firstRow.','.$Page->listRows)->where("content like"." "."'%".$terms."%'")->select();
+    $lists=array();
+    foreach ($list as $l){
+
+  	$id=$l['goods_id'];
+  	$uid=$l['user_id'];
+  	$good=M('Goods');
+  	$res=$good->where("id=$id")->find(); 
+  	$l['goods_name']=$res['goods_name'];
+
+    $user=M('User');
+    $res=$user->where("id=$uid")->find(); 
+    $l['username']=$res['username'];
+    
+  	//$lists[]=$l;  
+  	array_push($lists,$l);
+  	
+  }
+    
+    $this->assign('page',$show);// 赋值分页输出
+    $this->assign('list',$lists);
+	  $this->display(index);
+	}
 
 
 

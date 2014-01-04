@@ -2,12 +2,11 @@
 namespace Admin\Controller;
 Class CateController extends CommonController{
 	public function index(){
-		import('ORG.Util.Page');
 		$cate=M('Cate');
 		
 		$count      = $cate->count();// 查询满足要求的总记录数
 
-    $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
+      $Page = new \Org\Mrc\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 
     $show       = $Page->show();// 分页显示输出
 
@@ -94,6 +93,21 @@ Class CateController extends CommonController{
 	
 	
 }
+
+
+	public function search(){
+
+
+		$terms=$_GET['terms'];
+	  $cate=M('Cate');
+		$count = $cate->where("category like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
+	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $show = $Page->show();// 分页显示输出	
+    $list = $cate->limit($Page->firstRow.','.$Page->listRows)->where("category like"." "."'%".$terms."%'")->select();   
+    $this->assign('page',$show);// 赋值分页输出
+    $this->assign('list',$list);
+	  $this->display(index);
+	}
 	
 }
 ?>

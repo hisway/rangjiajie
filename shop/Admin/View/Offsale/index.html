@@ -33,9 +33,9 @@
     </style>
 </head>
 <body>
-<form class="form-inline definewidth m20" action="index.html" method="get">  
+<form class="form-inline definewidth m20" action="/rangjiajie/index.php/Admin/Offsale/search" method="get">  
     商品名称：
-    <input type="text" name="rolename" id="rolename"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <input type="text" name="terms" id="terms"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">查询</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" >
@@ -82,9 +82,9 @@
        if (id != '') {
           $.ajax({
             type: "get",
-            url: "http://localhost/rangjiajie/index.php/Admin/Off_sale/modify/id/"+ id, 
+            url: "http://localhost/rangjiajie/index.php/Admin/Offsale/modify/id/"+ id, 
             success: function(status){
-            	window.location.href="http://localhost/rangjiajie/index.php/Admin/Off_sale/index"
+            	window.location.href="http://localhost/rangjiajie/index.php/Admin/Offsale/index"
             	//$("#test").html("<font color='green'>"+status+"</font>");
             }  ,
     error: function(XMLHttpRequest, textStatus, errorThrown) {
