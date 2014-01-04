@@ -42,10 +42,7 @@
         <td width="10%" class="tableleft">产品名称</td>
         <td><input type="text" name="goods_name" value="{$list.goods_name}"/></td>
     </tr>
-    <tr>
-        <td width="10%" class="tableleft">产品二维码</td>
-        <td><input type="text" name="goods_sn" value="{$list.goods_sn}"/></td>
-    </tr>
+   
     <tr>
     	<td class="tableleft">产品类别</td>
     	<td>
@@ -143,6 +140,10 @@
         <td><img src="__ROOT__/Uploads/{$list.goods_img}"  maxwidth=80px></td>
     </tr>
     
+     <tr>
+        <td width="10%" class="tableleft">产品二维码</td>
+        <td><img id="sn" src="__ROOT__/Uploads/ewm/{$list.goods_sn}"/> <input type="text" name="goods_sn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="goods_sn" class="button" value="生成" />	 &nbsp;&nbsp;&nbsp; <span  id="img_sn">   </span>      </td>
+    </tr>
     
      <tr>
         <td width="10%" class="tableleft">产品描述</td>
@@ -191,8 +192,9 @@
 
 
 
-
+//所有品牌
 change_brand();
+
 //当前属性
 $.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#id").val(),cat_id:$("#category").val()},function(data){
    $.each(data, function(i,data){  
@@ -289,6 +291,23 @@ $.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#
         });
         return false; 
     });
+    
+    
+//改变二维码
+   $("#goods_sn").click(function(){
+   	var content=$("input[name='goods_sn']").val();
+   $.get("http://localhost/rangjiajie/index.php/Admin/Goods/get_goods_sn/",{id:$("#id").val(),content:content},function(data){
+   $("#sn").hide();
+   $("#img_sn").html("<img src=./Uploads/ewm/"+data.sn_image+">"); 
+   $("#img_sn").append("<input type=hidden name=sn_image value="+data.sn_image+">");
+               
+  
+        
+},'json');
+    
+  });    
+    
+    
      
     }); 
     

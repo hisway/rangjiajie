@@ -1,11 +1,13 @@
 <?php 
 namespace Admin\Controller;
+
 Class GoodsController extends CommonController{
+
 	public function index(){
 		$goods=M('Goods');
 		$count = $goods->count();// 查询满足要求的总记录数
 
-	  $Page = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Org\Mrc\Page($count,5);// 实例化分页类 传入总记录数和每页显示的记录数
 
 	  $show = $Page->show();// 分页显示输出
 
@@ -19,73 +21,21 @@ Class GoodsController extends CommonController{
 	}
 	
 	
-	public function detail(){
-		
-		$this->display();
-		
+	public function detail(){	
+		$this->display();	
 	}	
 	
+
+
+
 	public function add(){
-
-   
-	  if(empty($_FILES)){
-		
-		$this->error("请选择要上传的文件");
-		
-	  }else{
-	    $file=$this->up();
-	
-    if ($this->c($file)){
-	
-      $this->success('写入数据库成功');	
-	
-    }else{
-	    $good=M('Goods');
-      echo $good->getLastsql();
-    }
-	}
-	
-	
-	
-}
-
-private function up(){
-	
-		
-		$config = array(
-	      'mimes'    => array(), //允许上传的文件MiMe类型
-        'maxSize'  => 0, //上传的文件大小限制 (0-不做限制)
-        'exts'     => array(), //允许上传的文件后缀
-        'autoSub'  => true, //自动子目录保存文件
-        'subName'  => array('date', 'Y/m/d'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
-    	  'rootPath' => './Uploads/', //保存根路径
-        'savePath' => 'images/', //保存路径
-        'saveName' => array('uniqid', ''), //上传文件命名规则，[0]-函数名，[1]-参数，多个参数使用数组
-        'saveExt'  => '', //文件保存后缀，空则使用原后缀
-        'replace'  => false, //存在同名是否覆盖
-        'hash'     => true, //是否生成hash编码
-        'callback' => false, //检测文件是否存在回调，如果存在返回文件信息数组
-	);
-		$upload= new \Think\Upload($config);
-		$info=$upload->upload($_FILES);
-		if($info){
-			return $info;
-		}
-		else{	
-			$this->error($upload->getError());
-	
-		}
-	}
-
-
-	private function c($file){
 	
 		$kid=$_POST['kid'];
 		$kid=implode(",",$kid);
 		$good=M('Goods');
-		$data['goods_img']	= $file['goods_img']['savepath'].$file['goods_img']['savename'];
+		$data['goods_img']	= $_POST['g_image'];
 		$data['goods_name']	= $_POST['goods_name'];
-		$data['goods_sn']	= $_POST['goods_sn'];
+		$data['goods_sn']	= $_POST['sn_image'];
 		$data['cat_id']	= $_POST['cat_id'];
 		$data['brand_id']	= $_POST['brand_id'];
 		$data['keyword_id']	= $kid;
@@ -100,9 +50,9 @@ private function up(){
 		$data['create_time']=date("Y-m-d H:i:s");	
 		if ($good->data($data)->add())
 		{
-			return true;
+			$this->success('写入数据库成功');	
 		}else{
-			return false;
+			echo $good->getLastsql();
 		}
 	
 	}
@@ -127,9 +77,8 @@ public function edit(){
 		$kid=implode(",",$kid);
 	
 	  $good=M('Goods');
-		$data['goods_name']	= $_POST['goods_name'];
-		$data['goods_sn']	= $_POST['goods_sn'];
-		$data['cat_id']	= $_POST['cat_id'];
+		$data['goods_name']=$_POST['goods_name'];
+    $data['cat_id']	= $_POST['cat_id'];
 		$data['brand_id']	= $_POST['brand_id'];
 		$data['keyword_id']	= $kid;
 		$data['is_on_sale']	= $_POST['is_on_sale'];
@@ -140,19 +89,80 @@ public function edit(){
 		$data['promote_start_date']	= $_POST['promote_start_date'];
 		$data['promote_end_date']	= $_POST['promote_end_date'];
 		$data['goods_desc']	= $_POST['goods_desc'];	
-	
-		$rs=  $good->where("id= $id")->data($data)->save();
+		$rs=$good->where("id= $id")->data($data)->save();
+		
 		if($rs){
-		
-		  	$this->success();
-			
+		  	$this->success('更新成功');		
 			}else{
-		
-		    echo $good->getLastsql();
-		
+		    $this->success('更新成功'); 
 			}
-	
 }
+
+
+	public function search(){
+
+
+		$terms=$_GET['terms'];
+	  $goods=M('Goods');
+		$count = $goods->where("goods_name like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
+	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $show = $Page->show();// 分页显示输出
+    $list = $goods->limit($Page->firstRow.','.$Page->listRows)->where("goods_name like"." "."'%".$terms."%'")->select();
+    $this->assign('page',$show);// 赋值分页输出
+    $this->assign('list',$list);
+	  $this->display(index);
+	}
+	
+	
+	
+//生成二维码
+	public function get_goods_sn(){
+  vendor('phpqrcode.phpqrcode');
+  $id=$_GET['id'];   
+  $c = $_GET['content'];
+  if($id){
+  	
+  $good=M("Goods");	
+  
+  $list=$good->where("id=$id")->find();	
+  $sn_image=$list['goods_sn'];	
+  	if($sn_image){
+  		
+  	@unlink("Uploads/ewm/$sn_image");
+  	$t=uniqid();
+  	\QRcode::png($c, 'Uploads/ewm/'.$t.'.png'); 
+  	$list['sn_image']=$t.'.png';
+  	$list['sn_content']=$c;
+  	//更新数据库里的goods_sn
+  	$data['goods_sn']=$list['sn_image'];
+  	$good->where("id= $id")->data($data)->save();
+    $list=json_encode($list);	
+  	echo $list;	
+  				
+  	}else{
+  		
+  	$t=uniqid();
+  	\QRcode::png($c, 'Uploads/ewm/'.$t.'.png'); 
+  	$list['sn_image']=$t.'.png';
+  	$list['sn_content']=$c;
+  	//更新数据库里的goods_sn
+  	$data['goods_sn']=$list['sn_image'];
+  	$good->where("id= $id")->data($data)->save();
+  	$list=json_encode($list);	
+  	echo $list;		
+  	
+  	}
+  }else{
+  	
+  $t=uniqid();
+  \QRcode::png($c, 'Uploads/ewm/'.$t.'.png'); 
+  $list['sn_image']=$t.'.png';
+  $list['sn_content']=$c;
+  $list=json_encode($list);	
+  echo $list;
+  
+  }
+	}
 
 	
 

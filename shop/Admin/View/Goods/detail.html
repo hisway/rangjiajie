@@ -7,12 +7,12 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
     <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Js/jquery.sorted.js"></script>
+     <script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>   
     <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/cate_de.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Js/brand.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/brand.js"></script>   
     <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>    
@@ -41,11 +41,7 @@
     <tr>
         <td width="10%" class="tableleft">产品名称</td>
         <td><input type="text" name="goods_name"/></td>
-    </tr>
-    <tr>
-        <td width="10%" class="tableleft">产品二维码</td>
-        <td><input type="text" name="goods_sn"/></td>
-    </tr>
+    </tr>  
     <tr>
     	<td class="tableleft">产品类别</td>
     	<td>
@@ -115,10 +111,16 @@
    
    
     <tr>
+    	
         <td width="10%" class="tableleft">产品图片</td>
-        <td><input type="file" name="goods_img"></td>
+        <td><input type="file"  id="goods_img" name="goods_img" value="">&nbsp;<input type="button" class="button"  value="上传" onclick="return ajaxFileUpload();" />	 &nbsp;&nbsp;&nbsp;     <span  id="img">   </span>   </td>
+    
     </tr>
     
+     <tr>
+        <td width="10%" class="tableleft">产品二维码</td>
+        <td><input type="text" name="goods_sn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="goods_sn" class="button" value="生成" />	 &nbsp;&nbsp;&nbsp; <span  id="img_sn">   </span>   </td>
+    </tr>
     
      <tr>
         <td width="10%" class="tableleft">产品描述</td>
@@ -143,7 +145,8 @@
 
 
 
-<script>
+	
+<script 	type="text/javascript">
     $(function () {  
     	  	 
     	 set_category('', 1, '');   
@@ -232,7 +235,18 @@
      
     });
   
-   
+   $("#goods_sn").click(function(){
+   	var content=$("input[name='goods_sn']").val();
+   $.get("http://localhost/rangjiajie/index.php/Admin/Goods/get_goods_sn/",{content:content},function(data){   
+   $("#img_sn").html("<img src=./Uploads/ewm/"+data.sn_image+">"); 
+   $("#img_sn").append("<input type=hidden name=sn_image value="+data.sn_image+">");
+               
+  
+        
+},'json');
+    
+	
+  });
    
    
    
@@ -249,14 +263,42 @@
      $("input[name='is_promote']").click(function(){
     var a=$("input[name='is_promote']:checked").val();
     if(a==0){
-    	$("#pro_list").hide();
-    	$("#pro_list1").hide();
+     $("#pro_list").hide();
+     $("#pro_list1").hide();
     }else{
-    	$("#pro_list").show();
-      $("#pro_list1").show();
+     $("#pro_list").show();
+     $("#pro_list1").show();
     }
     
 });
     	
  
+</script>
+<script type="text/javascript">
+
+function ajaxFileUpload()
+{
+    $.ajaxFileUpload
+    (
+        {
+            url:'http://localhost/rangjiajie/index.php/Admin/Upload/upload',
+            secureuri:false,
+            fileElementId:'goods_img',
+            dataType: 'json',         
+            success: function (data, status)
+            {
+            
+     	         
+            $("#img").html("<img src=./Uploads/"+data.picname+">");
+            $("#img").append("<input type=hidden name=g_image value="+data.picname+">");
+               
+            },
+            error: function (data, status, e)
+            {  
+                $("#img").html("<span>图片加载失败！</span>");
+            }
+        }
+    )
+    return false;
+}
 </script>
