@@ -41,7 +41,8 @@ class DatabaseController extends CommonController{
                             $info['size'] = $file->getSize();
                         }
 
-                        $extension        = strtoupper($file->getExtension());
+                        //$extension        = strtoupper($file->getExtension()); //PHP>5.3.6 才支持
+                        $extension        = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
                         $info['compress'] = ($extension === 'SQL') ? '-' : $extension;
                         $info['time']     = strtotime("{$date} {$time}");
 
