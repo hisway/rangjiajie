@@ -5,7 +5,7 @@
 			$upload= new \Org\Mrc\Upload();
 			$fileElementName = 'goods_img';
 			$res=$upload->upload_file($fileElementName); 
-		  $list['picname']=$res['name'];
+		  $list['picname']=$res['path'];
 		  $list= json_encode($list);
 		  echo $list;
 		}

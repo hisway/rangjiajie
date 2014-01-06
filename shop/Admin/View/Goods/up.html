@@ -35,78 +35,8 @@
         
     </style>
 </head>
-<form action="__URL__/add" method="post" enctype="multipart/form-data">
+<form action="http://localhost/rangjiajie/index.php/Admin/Upload/upload" method="post" enctype="multipart/form-data">
 <table class="table table-bordered table-hover definewidth m10">
-    <tr>
-        <td width="10%" class="tableleft">产品名称</td>
-        <td><input type="text" name="goods_name"/></td>
-    </tr>  
-    <tr>
-    	<td class="tableleft">产品类别</td>
-    	<td>
-    <select id="c1" name="c1"></select>
-						  <select id="c2" name="c2"></select>
-						  <select id="c3" name="c3"></select>
-						  <select id="c4" name="c4"></select>
-						  <input type="hidden" id="category" name="cat_id" value="{$category}"><br/>
-	    </td>       
-		</tr>
-		
-    <tr>
-        <td class="tableleft">产品品牌</td>
-        <td>
-        	<select  id="get_brand" name="brand_id" size="1">              
-		</select> 
-		</td>
-    </tr>    
-       <tr>
-                            <td class="tableleft">拥有属性</td>
-                            <td>
-                            <select id="get_Key" name="kid[]" multiple="multiple" size=15>
-                               	
-		               
-		                        </select>
-                                
-                                 
-                            </td>
-                        </tr>
-    
-    
-    
-     <tr>
-        <td class="tableleft">状态</td>
-        <td>
-            上架：&nbsp;
-            <input type="radio" name="is_on_sale" value="1" checked/> 是
-            &nbsp;
-            <input type="radio" name="is_on_sale" value="0"/> 否
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            推荐：&nbsp;
-            <input type="radio" name="is_best" value="1" checked/> 是
-            &nbsp;
-            <input type="radio" name="is_best" value="0"/> 否
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            促销：&nbsp;
-            <input type="radio" name="is_promote" value="1" checked/> 是
-            &nbsp;
-            <input type="radio" name="is_promote" value="0"/> 否
-        </td>
-    </tr>
-   
-    <tr>
-        <td width="10%" class="tableleft">市场价</td>
-        <td><input type="text" name="market_price" /></td>
-    </tr>
-  
-    <tr id="pro_list">
-        <td width="10%" class="tableleft">促销价</td>
-        <td><input type="text" name="promote_price"/></td>
-    </tr>
-    
-     <tr id="pro_list1">
-        <td width="10%" class="tableleft">促销时间</td>
-        <td><input type="text" name="promote_start_date"/> - <input type="text" name="promote_end_date"/></td>
-    </tr>
    
    
     <tr>
@@ -117,7 +47,7 @@
         	  <input type='text' name='textfield' id='textfield' style="height:22px; border:1px solid #cdcdcd;"/> 
         	  <input type='button' style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value='浏览...' />
         	  <input type="file"  id="goods_img" style=" position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px" name="goods_img" size="28" onchange="document.getElementById('textfield').value=this.value" >
-        	  <input type="button" style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value="上传" onclick="return ajaxFileUpload();" />
+        	  <input type="button" style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value="上传" />
         		<span  id="img">   </span>   
           </div>		     
         
@@ -129,10 +59,7 @@
         <td><input type="text" name="goods_sn"/>&nbsp;<input type="button" id="goods_sn" style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;"value="生成" />	 &nbsp;&nbsp;&nbsp; <span  id="img_sn">   </span>   </td>
     </tr>
     
-     <tr>
-        <td width="10%" class="tableleft">产品描述</td>
-        <td><textarea name="goods_desc" id="myEditor" ></textarea></td>
-    </tr>
+     
     
     
    
@@ -296,7 +223,7 @@ function ajaxFileUpload()
             {
             
      	         
-            $("#img").html("<img src=./Uploads/images/"+data.picname+">");
+            $("#img").html("<img src=./Uploads/"+data.picname+">");
             $("#img").append("<input type=hidden name=g_image value="+data.picname+">");
                
             },

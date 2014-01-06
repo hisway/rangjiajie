@@ -19,9 +19,9 @@ class Upload {
 			$this->upload_error = $_FILES [$fileElementName] ['error'];
 			$this->upload_name = $_FILES [$fileElementName] ["name"]; // 取得上传文件名
 			$this->upload_filetype = $_FILES [$fileElementName] ["type"] ;
-			$this->upload_server_name = date ( "Y_m_dH_i_s" ) .substr($this->upload_name, -10) ;
+			$this->savePath=$_SERVER ["DOCUMENT_ROOT"] . "rangjiajie/Uploads/images/";
+			$this->subpath = date ("Y/m/d/");		
 			$this->upload_tmp_address = $_FILES [$fileElementName] ["tmp_name"]; // 取得临时地址
-			
 			$this->file_type = array (
 					"image/gif",
 					"image/pjpeg",
@@ -31,10 +31,28 @@ class Upload {
 			if (in_array ( $this->upload_filetype, $this->file_type )) {
 				
 				if ($this->upload_file_size < $this->upload_must_size) {
-					$res ['name']= $this->upload_server_name;			
-					$this->file_server_address = $_SERVER ["DOCUMENT_ROOT"] . "rangjiajie/Uploads/" . $this->upload_server_name;
-					if (move_uploaded_file ( $this->upload_tmp_address, $this->file_server_address )) {	
-					$res ['path'] = "/Uploads/" . $this->upload_server_name;
+					$res ['name']= $this->upload_server_name;	
+					$path=array();		
+				  $path=explode('/',$this->subpath);
+						for($i=0;$i< 3;$i++){
+							$this->savePath=$this->savePath.$path[$i]."/";
+					    if(is_dir($this->savePath)){   					   
+					    continue;
+							}else{
+																							
+							mkdir($this->savePath,0777);
+									
+							}
+						}
+				$ext=strstr($_FILES [$fileElementName] ["name"],".");
+				$this->file_server_address=	$this->savePath.uniqid().$ext;	
+			
+				$str=strstr($this->file_server_address,'images/');	
+				$this->upload_server_name=str_replace('images/','',$str);	
+				
+			    if (move_uploaded_file ( $this->upload_tmp_address, $this->file_server_address )) {	
+					$res ['path'] =$this->upload_server_name;
+				
 					}
 				} else {
 				

@@ -50,28 +50,20 @@
        
     </tr>
     </thead>
-     <!--   <volist name="user" id="user">
+      <volist name="grade" id="grade">
 	     <tr>
 	     	
             <td>{$i}</td>
-            <td>{$user.username}</td>
-            <td><if condition="$user.sex eq 1 ">男<else/>女</if></td>
-            <td>{$user.birthday}</td>
-            <form action="{:U(MODULE_NAME.'/Member/setField')}" method="post"><td><input type="hidden" name="id" value="{$user.id}"/><input type="text" style="width:120px;" name="rank_points" value="{$user.rank_points}" /><button type="submit" class="btn btn-primary">修改</button></td></form>
-            <td>{$user.email}</td>
-            <td>{$user.qq}</td>
-            <td>{$user.mobile_phone}</td>
-            <td>{$user.home_phone}</td>
-            <td>{$user.office_phone}</td>
-            <td><a href="detail.html?id={$user.id}">编辑</a></td>
-            <td><a onclick="return del({$user.id})" href="{:U(MODULE_NAME.'/Member/delUser')}?id={$user.id}">删除</a></td>
+            <td>{$grade.grade_name}</td>
+            <td>{$grade.min_points}</td>
+            <td>{$grade.max_points}</td>
         </tr>
-      </volist> -->
+      </volist> 
         </table>
         </form>
-<div class="inline pull-right page">
+<!--<div class="inline pull-right page">
          {$page}
-</div>
+</div>-->
 </body>
 </html>
 <script>

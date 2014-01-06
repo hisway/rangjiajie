@@ -105,12 +105,22 @@ public function edit(){
 		$terms=$_GET['terms'];
 	  $goods=M('Goods');
 		$count = $goods->where("goods_name like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
-	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Org\Mrc\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
 	  $show = $Page->show();// 分页显示输出
     $list = $goods->limit($Page->firstRow.','.$Page->listRows)->where("goods_name like"." "."'%".$terms."%'")->select();
+   
+    
+    foreach($list as $key=> $value){
+    	$attr=$value['goods_name'];
+    	$value['goods_name']=highlight($attr,$terms);
+    	$list[$key]=$value;   		   	
+    }
+    
+    
     $this->assign('page',$show);// 赋值分页输出
     $this->assign('list',$list);
 	  $this->display(index);
+	
 	}
 	
 	

@@ -117,11 +117,14 @@ else{
 		$terms=$_GET['terms'];
 	  $mess=M('Message');
 		$count = $mess->where("content like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
-	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Org\Mrc\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
 	  $show = $Page->show();// 分页显示输出
     $list = $mess->limit($Page->firstRow.','.$Page->listRows)->where("content like"." "."'%".$terms."%'")->select();
     $lists=array();
+    
     foreach ($list as $l){
+    $attr=$l['content'];  
+    $l['content']=highlight($attr,$terms);
 
   	$id=$l['goods_id'];
   	$uid=$l['user_id'];

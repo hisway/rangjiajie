@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // |         lanfengye <zibin_5257@163.com>
 // +----------------------------------------------------------------------
-namespace Org\Mrc;
+namespace Org\Mrc;               //tp3.1版本的分页类
 
 class Page {
     
