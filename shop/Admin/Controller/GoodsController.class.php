@@ -29,7 +29,6 @@ Class GoodsController extends CommonController{
 
 
 	public function add(){
-	
 		$kid=$_POST['kid'];
 		$kid=implode(",",$kid);
 		$good=M('Goods');

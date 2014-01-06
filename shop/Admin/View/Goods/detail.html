@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-datetimepicker.min.css" />
     <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>   
     <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
@@ -16,6 +17,7 @@
     <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>    
+    <script type="text/javascript" src="__PUBLIC__/Js/bootstrap-datetimepicker.min.js"></script>
     <style type="text/css">
         body {
             padding-bottom: 40px;
@@ -105,8 +107,43 @@
     
      <tr id="pro_list1">
         <td width="10%" class="tableleft">促销时间</td>
-        <td><input type="text" name="promote_start_date"/> - <input type="text" name="promote_end_date"/></td>
+        <td>
+   
+  <div id="datetimepicker1" class="input-append date">
+    <input data-format="yyyy/MM/dd" type="text" name="promote_start_date"></input>   
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+
+——
+
+  <div id="datetimepicker2" class="input-append date">
+    <input data-format="yyyy/MM/dd" type="text" name="promote_end_date"></input>   
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+
+</td>
+ 
     </tr>
+    
+    
+   <script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'pt-BR'
+    });
+    
+    $('#datetimepicker2').datetimepicker({
+      language: 'pt-BR'
+    }); 
+    
+  });
+</script>
    
    
     <tr>
