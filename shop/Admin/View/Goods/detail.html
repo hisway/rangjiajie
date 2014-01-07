@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/uploadify.css" />
     <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>   
     <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
@@ -17,7 +18,11 @@
     <script type="text/javascript" src="__PUBLIC__/Js/DropDownListBox.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>    
-    <script type="text/javascript" src="__PUBLIC__/Js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/bootstrap-datetimepicker.min.js"></script>  
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.uploadify/swfobject.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.uploadify/jquery.uploadify.v2.1.0.min.js"></script>
+
+    
     <style type="text/css">
         body {
             padding-bottom: 40px;
@@ -140,8 +145,7 @@
     
     $('#datetimepicker2').datetimepicker({
       language: 'pt-BR'
-    }); 
-    
+    });  
   });
 </script>
    
@@ -150,14 +154,16 @@
     	
         <td width="10%" class="tableleft">产品图片</td>
        <td>
+        	 <!--    //图片上传及时显示以及文件按钮的样式
         	  <div style="position:relative;width:360px;">
         	  <input type='text' name='textfield' id='textfield' style="height:22px; border:1px solid #cdcdcd;"/> 
         	  <input type='button' style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value='浏览...' />
         	  <input type="file"  id="goods_img" style=" position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px" name="goods_img" size="28" onchange="document.getElementById('textfield').value=this.value" >
         	  <input type="button" style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value="上传" onclick="return ajaxFileUpload();" />
         		<span  id="img">   </span>   
-          </div>		     
-        
+          </div>		 
+           -->   
+        <input type="file" name="goods_img" id="goods_img" />
     </td>
     </tr>
     
@@ -191,7 +197,16 @@
 
 	
 <script 	type="text/javascript">
-    $(function () {  
+    $(function () {
+    	
+    $('#goods_img').uploadify({
+   'auto' : true,
+   'multi': true,
+   'uploader': '/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/uploadify.swf',
+   'script': '/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/uploadify.php',
+   'folder': '/rangjiajie/Uploads/images/',
+   'cancelImg': '/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/cancel.png',
+    });   
     	  	 
     	 set_category('', 1, '');   
     	 
@@ -200,7 +215,8 @@
         initialFrameHeight: 200
     });     
     
-   
+  
+
 
     //品牌
      change_brand();
@@ -270,8 +286,6 @@
         return false; 
     });
      
-   
-  
    $('#backid').click(function(){
 		 window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods";
 		
@@ -322,6 +336,7 @@
 
 function ajaxFileUpload()
 {
+	//图片及时显示
     $.ajaxFileUpload
     (
         {

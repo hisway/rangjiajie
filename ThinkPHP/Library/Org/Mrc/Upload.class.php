@@ -1,7 +1,6 @@
 <?php
 
 namespace Org\Mrc;
-
 class Upload {	
 	var $upload_name;
 	var $upload_tmp_address;

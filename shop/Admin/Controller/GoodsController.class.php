@@ -32,7 +32,8 @@ Class GoodsController extends CommonController{
 		$kid=$_POST['kid'];
 		$kid=implode(",",$kid);
 		$good=M('Goods');
-		$data['goods_img']	= $_POST['g_image'];
+	//	$data['goods_img']	= $_POST['g_image']; 图片及时显示
+
 		$data['goods_name']	= $_POST['goods_name'];
 		$data['goods_sn']	= $_POST['sn_image'];
 		$data['cat_id']	= $_POST['cat_id'];
