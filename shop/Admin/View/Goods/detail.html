@@ -22,7 +22,8 @@
     <script type="text/javascript" src="__PUBLIC__/Js/jquery.uploadify/swfobject.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/jquery.uploadify/jquery.uploadify.v2.1.0.min.js"></script>
 
-    
+ 
+    
     <style type="text/css">
         body {
             padding-bottom: 40px;
@@ -163,7 +164,19 @@
         		<span  id="img">   </span>   
           </div>		 
            -->   
-        <input type="file" name="goods_img" id="goods_img" />
+     <span id="front">           
+        <span> <input type="file" name="goods_img" id="goods_img">
+        <a href="javascript:$('#goods_img').uploadifyUpload()"> 上传全部</a> |
+        <a href="javascript:$('#goods_img').uploadifyClearQueue()">取消上传</a>
+        	
+        	
+        <div id="divTxt" style="display:none">
+        	<span style="color:red"><strong>已经上传的图片有：</strong>
+        	</span>
+        	<br>
+        	</div>
+  </span>           	
+        		
     </td>
     </tr>
     
@@ -197,16 +210,24 @@
 
 	
 <script 	type="text/javascript">
-    $(function () {
-    	
+    $(function ()	{
     $('#goods_img').uploadify({
-   'auto' : true,
+   'auto' : false,
    'multi': true,
+   'buttonText':'',
+   'buttonImg':'/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/scan.png',
+   'width': 100,//buttonImg的大小
+   'height': 30,//
    'uploader': '/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/uploadify.swf',
    'script': '/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/uploadify.php',
    'folder': '/rangjiajie/Uploads/images/',
    'cancelImg': '/rangjiajie/shop/Admin/View/Public/Js/jquery.uploadify/cancel.png',
-    });   
+   onComplete: function (evt, queueID, fileObj, response, data) {
+   getResult(response);//获得上传的文件路径
+   }
+    
+   });  
+  
     	  	 
     	 set_category('', 1, '');   
     	 
@@ -361,3 +382,26 @@ function ajaxFileUpload()
     return false;
 }
 </script>
+
+<script type="text/javascript">
+ function getResult(content){
+ //通过上传的图片来动态生成text来保存路径
+ var board = document.getElementById("divTxt");
+ board.style.display="";
+ var img=document.createElement("img");
+ img.width = "150";
+ var newInput = document.createElement("input");
+ newInput.type = "hidden";
+ newInput.name="myFilePath[]";
+ var obj = board.appendChild(img);
+ var obj1 = board.appendChild(newInput);
+
+ var br= document.createElement("br");
+ board.appendChild(br);
+ obj.src='Uploads/images/'+content;
+ obj1.value=content;
+
+ }
+ </script>
+ 
+ 

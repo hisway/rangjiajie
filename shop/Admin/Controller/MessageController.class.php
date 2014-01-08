@@ -115,9 +115,13 @@ else{
 
 
 		$terms=$_GET['terms'];
+		$search_cate=$_GET['search_cate'];
+		
 	  $mess=M('Message');
+	  if($search_cate==1){
 		$count = $mess->where("content like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
-	  $Page = new \Org\Mrc\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
+	 
+	  $Page = new \Org\Mrc\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 	  $show = $Page->show();// 分页显示输出
     $list = $mess->limit($Page->firstRow.','.$Page->listRows)->where("content like"." "."'%".$terms."%'")->select();
     $lists=array();
@@ -135,11 +139,50 @@ else{
     $user=M('User');
     $res=$user->where("id=$uid")->find(); 
     $l['username']=$res['username'];
-    
-  	//$lists[]=$l;  
+   	//$lists[]=$l;  
+  	array_push($lists,$l);
+  }
+  }elseif($search_cate==2){
+  	$count=$mess->join('ws_user ON ws_message.user_id=ws_user.id')->where("username like"." "."'%".$terms."%'")->count();
+    $Page = new \Org\Mrc\Page($count,10);
+    $show = $Page->show();// 分页显示输出
+    $list = $mess->limit($Page->firstRow.','.$Page->listRows)->join('ws_user ON ws_message.user_id=ws_user.id')->where("username like"." "."'%".$terms."%'")->select();  
+    $lists=array();   
+    foreach ($list as $l){
+    $attr=$l['username'];  
+    $l['username']=highlight($attr,$terms);
+  	$id=$l['goods_id']; 	
+  	$good=M('Goods');
+  	$res=$good->where("id=$id")->find(); 
+  	$l['goods_name']=$res['goods_name'];
+   	//$lists[]=$l;  
+  	array_push($lists,$l);
+  	}
+   }else{
+  	$count=$mess->join('ws_goods ON ws_message.goods_id=ws_goods.id')->where("goods_name like"." "."'%".$terms."%'")->count();
+    $Page = new \Org\Mrc\Page($count,10);
+    $show = $Page->show();// 分页显示输出
+    $list = $mess->limit($Page->firstRow.','.$Page->listRows)->join('ws_goods ON ws_message.goods_id=ws_goods.id')->where("goods_name like"." "."'%".$terms."%'")->select();  
+    $lists=array();   
+    foreach ($list as $l){
+    $attr=$l['goods_name'];  
+    $l['goods_name']=highlight($attr,$terms);
+  	$uid=$l['user_id'];	
+  	$user=M('User');
+    $res=$user->where("id=$uid")->find(); 
+    $l['username']=$res['username'];
+   	//$lists[]=$l;  
   	array_push($lists,$l);
   	
   }
+  
+  
+  }
+  	
+  
+  
+  
+  
     
     $this->assign('page',$show);// 赋值分页输出
     $this->assign('list',$lists);

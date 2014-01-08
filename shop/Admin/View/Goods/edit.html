@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/style.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap-datetimepicker.min.css" />
     <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Js/ajaxfileupload.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/ckform.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
@@ -162,12 +163,15 @@
    
     <tr>
         <td width="10%" class="tableleft">产品图片</td>
-        <td><img src="__ROOT__/Uploads/images/{$list.goods_img}"  maxwidth=80px></td>
+        <td><span id="goods_img"></span><br/><span id="add"></span></td>
     </tr>
     
      <tr>
         <td width="10%" class="tableleft">产品二维码</td>
-        <td><img id="sn" src="__ROOT__/Uploads/ewm/{$list.goods_sn}"/> <input type="text" name="goods_sn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="goods_sn" style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value="生成" />	 &nbsp;&nbsp;&nbsp; <span  id="img_sn">   </span>      </td>
+        <td><if condition="$list.goods_sn neq '' ">
+        	<img id="sn" src="__ROOT__/Uploads/ewm/{$list.goods_sn}"/>
+        	 </if>
+          <input type="text" name="goods_sn"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="goods_sn" style="background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;" value="生成" />	 &nbsp;&nbsp;&nbsp; <span  id="img_sn">   </span>      </td>
     </tr>
     
      <tr>
@@ -203,7 +207,7 @@
 		 }); 
 		 
 //当前品牌		    
-  $.get("http://localhost/rangjiajie/index.php/Admin/Brand/getBrandbyid/",{id:$("#id").val(),cat_id:$("#category").val()},function(data){
+   $.get("http://localhost/rangjiajie/index.php/Admin/Brand/getBrandbyid/",{id:$("#id").val(),cat_id:$("#category").val()},function(data){
 
    $.each(data, function(i,data){
    	if(data.id==data.b_id){
@@ -239,22 +243,29 @@ $.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#
               if(data.id==item[j]){
               	              
               $("#get_Key option[value="+data.id+"]").attr("selected",true); 	
-      
-           
-              
-              
+                
              
               }
-           } 
-              
-   
-});	
-    
-  
-        
+           }   
+});	        
 },'json');
 
 
+//当前图片
+$.get("http://localhost/rangjiajie/index.php/Admin/Goods/get_goods_img_byid/",{id:$("#id").val()},function(data){
+	var base_url="http://localhost/rangjiajie/Uploads/images/"
+	  var  item=new Array();
+    
+    item=data.goods_img.split(",");
+   
+    for(j=0;j<item.length-1;j++){
+     
+    $("#goods_img").append("<img src="+base_url+item[j]+" "+"width=150 >  <a href='javascript:void(0)' onclick=del_img('"+item[j]+"')><i class='icon-trash'></i></a><br/>"); 
+    $("#add").html("<div style='position:relative;width:240px;'>增加图片：<input type='button' style='background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;' value='浏览...' /><input type='file'  id='add_img' style=' position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:230px' name='add_img' size='28'>&nbsp;<input type='button' style='background-color:#FFF; border:1px solid #CDCDCD;height:24px;width:70px;' value='上传' onclick='return ajaxFileUpload();' /><span  id='img'>  </span>");
+
+    }
+
+	},'json');	
 //关键字属性
     $("#c1").change(function(){
           $("#get_Key")[0].options.length=0;
@@ -324,10 +335,7 @@ $.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#
    $.get("http://localhost/rangjiajie/index.php/Admin/Goods/get_goods_sn/",{id:$("#id").val(),content:content},function(data){
    $("#sn").hide();
    $("#img_sn").html("<img src=./Uploads/ewm/"+data.sn_image+">"); 
-   $("#img_sn").append("<input type=hidden name=sn_image value="+data.sn_image+">");
-               
-  
-        
+   $("#img_sn").append("<input type=hidden name=sn_image value="+data.sn_image+">");         
 },'json');
     
   });    
@@ -347,7 +355,7 @@ $.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#
     }); 
     
      //促销 
-     $("input[name='is_promote']").click(function(){
+    $("input[name='is_promote']").click(function(){
     var a=$("input[name='is_promote']:checked").val();
     if(a==0){
       $("#pro_list").hide();
@@ -359,4 +367,46 @@ $.get("http://localhost/rangjiajie/index.php/Admin/Keyword/getKeybyid/",{id:$("#
     }
     
 });
+</script>
+
+<script  type="text/javascript">
+
+
+function ajaxFileUpload()
+{
+	//图片及时显示
+    $.ajaxFileUpload
+    (
+      
+        {
+            url:'http://localhost/rangjiajie/index.php/Admin/Upload/add',
+            secureuri:false,
+            fileElementId:'add_img',
+            dataType: 'json',         
+            success: function (data, status)
+            {
+            
+     	         
+            $("#img").append("<img src=http://localhost/rangjiajie/Uploads/images/"+data.picname+" "+"width=150>");
+            $("#img").append("<input type=hidden name=add_img[] value="+data.picname+">");
+               
+            },
+            error: function (data, status, e)
+            {  
+                $("#img").html("<span>图片加载失败！</span>");
+            }
+        }
+    )
+    return false;
+}
+
+
+
+	function del_img(img){
+     var d_img=img;
+      $.get("http://localhost/rangjiajie/index.php/Admin/Goods/get_goods_img_byid/",{id:$("#id").val(),d_img:d_img},function(data){
+window.location.href="http://localhost/rangjiajie/index.php/Admin/Goods/edit/id/"+$("#id").val();   
+},'json');
+     
+		}
 </script>

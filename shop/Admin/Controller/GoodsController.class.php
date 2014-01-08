@@ -7,7 +7,7 @@ Class GoodsController extends CommonController{
 		$goods=M('Goods');
 		$count = $goods->count();// 查询满足要求的总记录数
 
-	  $Page = new \Org\Mrc\Page($count,5);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Org\Mrc\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 
 	  $show = $Page->show();// 分页显示输出
 
@@ -29,13 +29,21 @@ Class GoodsController extends CommonController{
 
 
 	public function add(){
+		
+		
 		$kid=$_POST['kid'];
 		$kid=implode(",",$kid);
 		$good=M('Goods');
-	//	$data['goods_img']	= $_POST['g_image']; 图片及时显示
-
+	 //$data['goods_img']	= $_POST['g_image']; 图片及时显示
+    $front=$_POST['myFilePath'];
+    $front=implode(',',$front);
+    $data['goods_img']=$front.","; 
+ 
 		$data['goods_name']	= $_POST['goods_name'];
-		$data['goods_sn']	= $_POST['sn_image'];
+		if(!empty($_POST['sn_image'])){
+	  $data['goods_sn']	= $_POST['sn_image'];
+	   }
+		
 		$data['cat_id']	= $_POST['cat_id'];
 		$data['brand_id']	= $_POST['brand_id'];
 		$data['keyword_id']	= $kid;
@@ -59,24 +67,34 @@ Class GoodsController extends CommonController{
 
 
 
-public function edit(){
-  $good=M("Goods");	
-	$id=$_GET['id'];	
-	$list=$good->where("id=$id")->find();	
-  $this->assign('list',$list);	
-  $this->display();
-}
+  public function edit(){
+  	$good=M("Goods");	
+		$id=$_GET['id'];	
+		$list=$good->where("id=$id")->find();	
+  	$this->assign('list',$list);	
+  	$this->display();
+	}
 
 
 
 	public  function modify(){
 	
 		$id=$_POST['id'];
-		
-	  $kid=$_POST['kid'];
+		$kid=$_POST['kid'];
 		$kid=implode(",",$kid);
-	
 	  $good=M('Goods');
+	  if(!empty($_POST['add_img'])){
+		//新增的图片
+		$add_img=$_POST['add_img'];
+		$add_img=implode(",",$add_img);
+	 
+	 
+	  $res=$rs=$good->where("id= $id")->find();
+		$goods_img=$res['goods_img'];
+		$goods_img=$goods_img.$add_img.",";
+		
+	  $data['goods_img']=$goods_img;
+	}
 		$data['goods_name']=$_POST['goods_name'];
     $data['cat_id']	= $_POST['cat_id'];
 		$data['brand_id']	= $_POST['brand_id'];
@@ -105,7 +123,7 @@ public function edit(){
 		$terms=$_GET['terms'];
 	  $goods=M('Goods');
 		$count = $goods->where("goods_name like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
-	  $Page = new \Org\Mrc\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Org\Mrc\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 	  $show = $Page->show();// 分页显示输出
     $list = $goods->limit($Page->firstRow.','.$Page->listRows)->where("goods_name like"." "."'%".$terms."%'")->select();
    
@@ -129,7 +147,7 @@ public function edit(){
 	public function get_goods_sn(){
   vendor('phpqrcode.phpqrcode');
   $id=$_GET['id'];   
-  $c = $_GET['content'];
+  $c =$_GET['content'];
   if($id){
   	
   $good=M("Goods");	
@@ -172,6 +190,30 @@ public function edit(){
   echo $list;
   
   }
+	}
+	
+	
+	
+	
+	public function get_goods_img_byid(){
+		$id=$_GET['id'];
+		$d_img=$_GET['d_img'];
+		$good=M('Goods');	
+		if(!$d_img){
+		$rs=$good->where("id=$id")->find();
+		$list['goods_img']  =$rs['goods_img'];
+		$list=json_encode($list);	
+	  echo $list;
+		}else{
+		$rs=$good->where("id=$id")->find();
+		$list['goods_img']  =$rs['goods_img'];
+		$list['goods_img']=str_replace("$d_img,","",$list['goods_img']);	
+		$data['goods_img']=$list['goods_img'];
+  	$list=$good->where("id= $id")->data($data)->save();
+  	@unlink("Uploads/images/$d_img");
+		$list=json_encode($list);	
+	  echo $list;		
+		}
 	}
 
 	

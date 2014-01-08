@@ -5,7 +5,7 @@ public function index(){
 		$goods=M('Goods');
 		$count = $goods->where('is_best = 1 and is_on_sale= 1')->count();// 查询满足要求的总记录数
 
-    $Page = new \Org\Mrc\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数
+    $Page = new \Org\Mrc\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 
     $show = $Page->show();// 分页显示输出
 
@@ -49,7 +49,7 @@ echo  date("Y-m-d H:i:s");
 		$terms=$_GET['terms'];
 	  $goods=M('Goods');
 		$count = $goods->where("goods_name like"." "."'%".$terms."%'")->count();// 查询满足要求的总记录数
-	  $Page = new \Org\Mrc\Page($count,1);// 实例化分页类 传入总记录数和每页显示的记录数
+	  $Page = new \Org\Mrc\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
 	  $show = $Page->show();// 分页显示输出
     $list = $goods->limit($Page->firstRow.','.$Page->listRows)->where("goods_name like"." "."'%".$terms."%'")->select();
     

@@ -39,7 +39,9 @@ if (!empty($_FILES)) {
 						}
 	      $ext=strstr($_FILES['Filedata']['name'],".");
 				$file_server_address=	$savePath.uniqid().$ext;
-	
+	      
+	      $str=strstr($file_server_address,'images/');	
+				$upload_server_name=str_replace('images/','',$str);	
 	$targetFile =  str_replace('//','/',$targetPath) . 	$file_server_address;
 	
 	// $fileTypes  = str_replace('*.','',$_REQUEST['fileext']);
@@ -52,7 +54,7 @@ if (!empty($_FILES)) {
 		// mkdir(str_replace('//','/',$targetPath), 0755, true);
 		
 		move_uploaded_file($tempFile,$targetFile);
-		echo "1";
+		echo "$upload_server_name";
 	// } else {
 	// 	echo 'Invalid file type.';
 	// }

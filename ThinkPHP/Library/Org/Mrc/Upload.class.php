@@ -43,6 +43,8 @@ class Upload {
 									
 							}
 						}
+						
+						
 				$ext=strstr($_FILES [$fileElementName] ["name"],".");
 				$this->file_server_address=	$this->savePath.uniqid().$ext;	
 			

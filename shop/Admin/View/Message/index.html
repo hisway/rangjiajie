@@ -33,8 +33,13 @@
     </style>
 </head>
 <body>
-<form class="form-inline definewidth m20" action="/rangjiajie/index.php/Admin/Message/search" method="get">  
-    商品名称：
+<form class="form-inline definewidth m20" action="/rangjiajie/index.php/Admin/Message/search" method="get">      
+   	搜索内容：
+   	<select  name="search_cate" style="width:60px">
+   		<option value="0">商品</option>
+   		<option value="1">评论</option>
+   		<option value="2">用户名</option>
+    </select>
     <input type="text" name="terms" id="terms"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">查询</button></form>
 <table class="table table-bordered table-hover definewidth m10" >
