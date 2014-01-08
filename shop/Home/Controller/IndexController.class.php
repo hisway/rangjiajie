@@ -3,7 +3,10 @@ namespace Home\Controller;
 use \Think\Controller;
 Class IndexController extends Controller{
 	public function index(){
-	    $this->display();
+		$db = M('goods');
+		$data = M('goods')->limit($startNum,$num)->select();
+		$this->data = $data;
+	    $this->display(index2);
 	}
 
 	public function request(){
