@@ -1,4 +1,4 @@
-http://rangjiajie.com
+rangjiajie
 
 =====================================================================================================
 
@@ -48,14 +48,14 @@ deploy root
 =====================================================================================================
 
 数据库：
-https://198.46.145.47:7777/thirdparty/phpMyAdmin/ 
+https://xxxx:7777/thirdparty/phpMyAdmin/ 
     'DB_HOST'=>'localhost',
     'DB_NAME'=>'rangjiajie',
     'DB_USER'=>'rangjiajie',
     'DB_PWD'=>'comrangjiajie'
 
 FTP:
-198.46.145.47  rangjiajie.com   comrangjiajie
+xxxx  rangjiajie.com   comrangjiajie
 
 =====================================================================================================
 
